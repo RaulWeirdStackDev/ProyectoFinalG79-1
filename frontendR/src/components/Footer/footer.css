@@ -1,0 +1,46 @@
+footer {
+    background-color: #000;
+    display: flex;
+    justify-content: space-between; /* Distribuye los elementos */
+    align-items: center;
+    padding: 10px 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+#drixel p, #preguntas p {
+    color: #fff;
+    margin: 0;
+    font-size: 14px;
+    white-space: nowrap; /* Evita que el texto se corte o se divida en varias líneas */
+}
+
+#iconos {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre los iconos */
+}
+
+#iconos img#facebook, #iconos i.fa-instagram {
+    width: 24px; /* Tamaño uniforme para ambos iconos */
+    height: 24px;
+    color: #fff; /* Para el icono de FontAwesome (Instagram) */
+}
+
+#iconos i.fa-instagram {
+    font-size: 24px; /* Asegura que el icono de Instagram coincida con el tamaño de la imagen de Facebook */
+    line-height: 24px; /* Para alinear verticalmente el icono de FontAwesome */
+}
+
+#facebook {
+    background-color: white;
+    border-radius: 100%;
+}
+
+/* Ajuste específico para #preguntas */
+#preguntas {
+    flex-shrink: 0; /* Evita que el contenedor se encoja y corte el texto */
+    text-align: right; /* Alinea el texto a la derecha */
+}

@@ -1,0 +1,30 @@
+nav {
+  background-color: rgb(233, 233, 233);
+  display: flex;
+  justify-content: space-between; /* Distribuye los elementos: flecha a la izquierda, logo al centro, iconos a la derecha */
+  align-items: center;
+  padding: 10px 20px;
+}
+
+/* Contenedor del logo */
+#imagen {
+  flex: 1; /* Permite que el logo ocupe el espacio central */
+  display: flex;
+  justify-content: center;
+}
+
+#imagen img {
+  width: 200px;
+  height: auto;
+}
+
+/* Contenedor de los iconos */
+#iconos {
+  display: flex;
+  gap: 15px; /* Espacio entre los iconos */
+}
+
+#iconos img {
+  width: 30px; /* Tamaño uniforme para los iconos */
+  height: 30px;
+}
