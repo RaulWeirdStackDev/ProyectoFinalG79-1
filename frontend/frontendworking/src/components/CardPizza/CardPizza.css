@@ -1,0 +1,42 @@
+.card-pizza {
+  max-width: 300px;
+  margin: 30px auto;
+  border-radius: 8px;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.card-footer {
+  padding: 5px;
+  border-top: 1px solid #ddd;
+}
+
+
+.ingredients-list {
+  padding: 0;
+  margin: 0;
+  list-style-type: disc;
+  text-align: left;
+}
+
+.ingredients-list li {
+  text-transform: capitalize;
+  padding: 0;
+  margin-left: 20px;
+}
+
+.pdesc {
+  text-align: justify;
+}
+
+.btn-click {
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-click:active {
+  transform: scale(1.1); /* Aumenta el tamaño un 10% */
+}
