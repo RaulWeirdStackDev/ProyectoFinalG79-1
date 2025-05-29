@@ -31,6 +31,6 @@ export const validateCredentials = (email, password, confirmPassword = null) => 
     return false;
   }
 
-  showAlert('Éxito', 'Validación exitosa ✔️.', 'success');
+ 
   return true;
 };

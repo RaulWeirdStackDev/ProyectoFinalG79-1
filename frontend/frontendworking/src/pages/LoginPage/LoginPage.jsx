@@ -1,7 +1,9 @@
 import React, { useState, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { validateCredentials } from '../../components/Tools/loginRegisterTools';
+import { validateCredentials} from '../../components/Tools/loginRegisterTools';
 import { UserContext } from '../../context/UserContext';
+
+
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -49,4 +51,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default LoginPage;  
