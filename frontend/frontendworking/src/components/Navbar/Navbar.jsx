@@ -1,57 +1,57 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../context/CartContext';
-import { UserContext } from '../../context/UserContext'; 
+import { UserContext } from '../../context/UserContext';
 import './Navbar.css';
 
-const Navbar = () => {
-  const { total } = useContext(CartContext); // Traigo el total desde CartContext.
-  const { token, logout } = useContext(UserContext); // Obtengo el token y el método logout desde UserContext.
+import logoDrixel from '../../assets/images/LOGODRIXEL2025.png';
+import useroff from '../../assets/images/USERBLACK.png';
+import useron from '../../assets/images/USERGREEN.png';
 
+const Navbar = () => {
+  const { total } = useContext(CartContext);
+  const { token, logout, userData } = useContext(UserContext);
+  console.log('Navbar userData:', userData);
+  console.log('Navbar token:', token);
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div className="container-fluid">
-        <span className="navbar-title d-none d-lg-block">Pizzería Mamma Mía!</span>
-        <button
-          className="navbar-toggler mb-2 mt-2"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link to="/" className="nav-link">🍕 Home</Link>
-            </li>
-            {token ? (
-              <>
-                <li className="nav-item">
-                  <Link to="/profile" className="nav-link">⚙️ Profile</Link>
-                </li>
-                <li className="nav-item">
-                  <button onClick={logout} className="nav-link btn btn-link">🔒 Logout</button>
-                </li>
-              </>
-            ) : (
-              <>
-                <li className="nav-item">
-                  <Link to="/login" className="nav-link">🔐 Login</Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/register" className="nav-link">🔏 Register</Link>
-                </li>
-              </>
-            )}
-          </ul>
+    <nav className="navbar navbar-expand-lg custom-navbar">
+      <div className="container-fluid navbar-flex-container">
+
+        {/* Espacio vacío izquierdo para balancear el centrado */}
+        <div className="navbar-left"></div>
+
+        {/* Logo centrado */}
+        <div className="navbar-center">
+          <Link to="/" className="navbar-home-logo">
+            <img src={logoDrixel} alt="Drixel Store Logo" className="navbar-logo" />
+          </Link>
         </div>
-        <Link to="/cart" className="total-button nav-link">
-          🛒 Total: ${total.toLocaleString()}
-        </Link>
+
+        {/* Botones a la derecha */}
+        <div className="navbar-right-buttons">
+          {token ? (
+            <>
+              <Link to="/profile" className="icon-button">
+                <img src={useron} alt="Usuario activo" className="icon-img" />
+              </Link>
+              {userData?.nombre && (
+                <span className="navbar-username mx-2">
+                  {userData.nombre}
+                </span>
+              )}
+              <button onClick={logout} className="icon-button btn btn-link">
+                <img src="/icons/logout.png" alt="Logout" className="icon-img" />
+              </button>
+            </>
+          ) : (
+            <Link to="/useroptions" className="icon-button">
+              <img src={useroff} alt="Usuario apagado" className="icon-img" />
+            </Link>
+          )}
+          <Link to="/cart" className="total-button nav-link">
+            🛒 ${total.toLocaleString()}&nbsp;
+          </Link>
+        </div>
       </div>
     </nav>
   );

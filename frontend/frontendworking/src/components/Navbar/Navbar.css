@@ -1,45 +1,98 @@
-.navbar {
-  padding-top: 0.2rem !important; 
-  padding-bottom: 0.2rem !important;
+/* Fondo gris claro en el navbar */
+.custom-navbar {
+  padding: 0.5rem 0.5rem !important;
+  background-color: #e5e5e5 !important;
 }
 
-.navbar-title {
-  font-size: 1rem;
-  color: white;
-  margin: 0;
+/* Contenedor flex principal: 3 áreas */
+.navbar-flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Área izquierda vacía para balancear */
+.navbar-left {
+  width: 80px; /* Mismo ancho que navbar-right para centrar visualmente */
+}
+
+/* Logo centrado */
+.navbar-center {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+/* Imagen del logo */
+.navbar-logo {
+  height: 50px;
+  max-width: 220px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Área derecha con los botones */
+.navbar-right-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  width: 80px; /* Igual que el espacio izquierdo */
+}
+
+/* Estilo del botón de total del carrito */
+.total-button {
+  color: rgb(0, 0, 0) !important;
+  border: 2px solid #294168 !important;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+/* Estilo para botones con íconos (login, logout, etc.) */
+.icon-button {
+  background: none;
+  border: none;
   padding: 0;
 }
 
-.total-button {
-  margin-left: auto;
-  color: rgb(196, 246, 255) !important;
-  border: 1px solid rgb(70, 121, 229) !important;
-  width: auto !important;
+/* Imagen de íconos */
+.icon-img {
+  height: 26px;
+  width: 26px;
+  cursor: pointer;
 }
 
-.navbar .nav-link {
-  border: 1px solid white;
-  color: white;
-  padding: 0.3rem;
-  border-radius: 4px;
-  margin: 0.3rem;
-  font-size: 0.8rem;
-  display: inline-block;
-  transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.navbar .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.5);
-}
-
-.navbar .nav-link:active {
+/* Hover efecto en íconos */
+.icon-button:hover .icon-img {
   transform: scale(1.1);
+  transition: transform 0.2s ease;
 }
 
+/* Responsive para móviles */
 @media (max-width: 768px) {
-  .navbar .nav-link {
-    width: 30%; 
-    text-align: center; 
-    margin: 0.2rem 0; 
+  .navbar-logo {
+    height: 40px;
+    max-width: 180px;
+  }
+
+  .total-button {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .icon-img {
+    height: 22px;
+    width: 22px;
+  }
+
+  .navbar-left,
+  .navbar-right-buttons {
+    width: 60px;
   }
 }
