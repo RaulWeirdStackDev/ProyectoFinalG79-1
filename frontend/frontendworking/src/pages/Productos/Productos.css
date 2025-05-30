@@ -1,0 +1,21 @@
+.iconos-wrapper-productos {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+}
+
+.iconos-wrapper-productos img {
+  width: 100px !important;
+  height: auto !important;
+  transition: all 0.3s ease;
+}
+
+.iconos-wrapper-productos a {
+  display: inline-block;
+  text-align: center;
+}
+
+
+

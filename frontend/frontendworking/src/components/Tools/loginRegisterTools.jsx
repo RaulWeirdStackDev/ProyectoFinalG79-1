@@ -7,7 +7,7 @@ export const showAlert = (title, text, icon) => {
     title,
     text,
     icon,
-    confirmButtonColor: '#3085d6', // estilo adicional
+    confirmButtonColor: '#3085d6', 
   });
 };
 
