@@ -1,42 +1,65 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../../context/UserContext';
-import './Profile.css';
-import profilePhoto from '../../assets/images/Perfil_example.jpg';
+import React, { useContext, useEffect, useState } from "react";
+import { Button, Image } from "react-bootstrap";
+import { UserContext } from "../../context/UserContext";
+import profilePhoto from "../../assets/images/Perfil_example.jpg"; // Importa tu imagen por defecto
+import "./perfilUsuario.css";
 
-const Profile = () => {
-  const { token, logout } = useContext(UserContext); // Traigo el token y el método logout del contexto.
-  const [email, setEmail] = useState('');
+const PerfilUsuario = () => {
+  const { logout, userData } = useContext(UserContext); // Traigo logout y userData
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/auth/me', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (!response.ok) throw new Error('Error al obtener el perfil del usuario.');
-
-        const data = await response.json();
-        setEmail(data.email); // Guardo el mail del usuario ya autenticado.
-      } catch (error) {
-        console.error('Error al obtener el perfil:', error.message);
-      }
-    };
-
-    if (token) {
-      fetchUserProfile();
+    if (userData) {
+      setLoading(false);
     }
-  }, [token]);
+  }, [userData]);
+
+  if (loading) {
+    return <p>Cargando perfil...</p>;
+  }
 
   return (
-    <div className="d-flex flex-column align-items-center justify-content-center">
-      <img src={profilePhoto} alt="Foto de usuario" className="profile-img" />
-      <h2>Perfil de usuario</h2>
-      {email ? <p>Email: {email}</p> : <p>Cargando perfil...</p>}
-      <button className="btn btn-danger mt-3" onClick={logout}>
-        Cerrar sesión
-      </button>
+    <div className="perfil-container">
+      <h2 className="perfil-title">Mi perfil:</h2>
+
+      <div className="perfil-main-content">
+        {/* Columna izquierda - Solo imagen */}
+        <div className="perfil-left-section">
+          <div className="perfil-image-container">
+            <Image
+              src={userData.url ? userData.url : profilePhoto}
+              alt="Foto de perfil"
+              className="perfil-image"
+            />
+          </div>
+        </div>
+
+        {/* Columna derecha - Info y botones */}
+        <div className="perfil-right-section">
+          <div className="perfil-info">
+            <div className="info-item">
+              Nombre: {userData.nombre} {userData.apellido}
+            </div>
+            <div className="info-item">Mail: {userData.email}</div>
+            <div className="info-item">
+              RUT/ID: {userData.rut ? userData.rut : "No disponible"}
+            </div>
+            {/* Puedes agregar más campos aquí si los tienes */}
+          </div>
+        </div>
+      </div>
+
+      {/* Botones centrados */}
+      <div className="perfil-buttons">
+        <Button className="btn-azul">Editar perfil</Button>
+        <Button className="btn-azul">Ordenes</Button>
+        <Button className="btn-azul">Direcciones</Button>
+        <Button className="btn-cerrar" onClick={logout}>
+          Cerrar sesión
+        </Button>
+      </div>
     </div>
   );
 };
 
-export default Profile;
+export default PerfilUsuario;

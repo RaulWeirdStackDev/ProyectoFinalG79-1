@@ -1,9 +1,8 @@
-
 import React, { useState, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { validateCredentials } from '../../components/Tools/loginRegisterTools';
 import { UserContext } from '../../context/UserContext';
-import { useNavigate } from 'react-router-dom'; // 👈 Importa useNavigate
+import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
   const [nombre, setNombre] = useState('');
@@ -13,14 +12,14 @@ const RegisterPage = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const { register } = useContext(UserContext);
 
-  const navigate = useNavigate(); // 👈 Hook que te permite redirigir
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateCredentials(email, password, confirmPassword)) {
       const success = await register(nombre, apellido, email, password);
       if (success) {
-        navigate('/login'); // 👈 Redirige a /login si fue exitoso
+        navigate('/login'); // ✅ Redirige tras éxito
       }
     }
   };
@@ -90,4 +89,3 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
- 

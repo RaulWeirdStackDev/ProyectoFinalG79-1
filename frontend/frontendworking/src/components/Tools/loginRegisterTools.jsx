@@ -1,15 +1,17 @@
+// loginRegisterTools.js
 import Swal from 'sweetalert2';
 
-// Función para mostrar las alertas...
+// ✅ Función para mostrar alertas
 export const showAlert = (title, text, icon) => {
   Swal.fire({
     title,
     text,
     icon,
+    confirmButtonColor: '#3085d6', // estilo adicional
   });
 };
 
-// Función para validar email y contraseñas...
+// ✅ Validaciones con alertas
 export const validateCredentials = (email, password, confirmPassword = null) => {
   if (!email || !password) {
     showAlert('Error', 'Todos los campos son obligatorios.', 'error');
@@ -31,6 +33,5 @@ export const validateCredentials = (email, password, confirmPassword = null) => 
     return false;
   }
 
- 
   return true;
 };
