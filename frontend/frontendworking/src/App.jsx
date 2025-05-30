@@ -43,7 +43,7 @@ const App = () => {
 
                       <Route
                         path="/login"
-                        element={token ? <Navigate to="/" replace /> : <LoginPage />}
+                        element={token ? <Navigate to="/profile" replace /> : <LoginPage />}
                       />
                       <Route
                         path="/useroptions"
