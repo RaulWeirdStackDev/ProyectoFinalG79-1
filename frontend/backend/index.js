@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/api/auth", authRoute);
-app.use("/api/pizzas", pizzaRoute);
+app.use("/api/productos", pizzaRoute);
 app.use("/api/checkouts", checkoutRoute);
 app.use((_, res) => {
   res.status(404).json({ error: "Not Found" });
