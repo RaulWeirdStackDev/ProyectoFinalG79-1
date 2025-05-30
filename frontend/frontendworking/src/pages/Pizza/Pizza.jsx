@@ -16,7 +16,8 @@ const Pizza = () => {
     return (
         <div className="container mt-4 d-flex flex-column align-items-center justify-content-center">
             <h2>Pizza {pizza.name}:</h2>
-            <p className="bg-dark text-white text-center p-3 rounded w-100">{pizza.desc}</p>
+            <p className="bg-dark text-white text-center p-3 rounded w-100">
+                {pizza.desc}</p>
             <CardPizza {...pizza} 
              addToCart={() => addToCart(pizza)}
              hideVerMas={true} />

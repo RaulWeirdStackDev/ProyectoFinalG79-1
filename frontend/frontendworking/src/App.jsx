@@ -5,6 +5,7 @@ import Home from './pages/Home/Home';
 import UserOptions from './pages/UserOptions/UserOptions';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
 import LoginPage from './pages/LoginPage/LoginPage';
+import Productos from './pages/Productos/Productos';
 import Cart from './pages/Cart/Cart';
 import Pizza from './pages/Pizza/Pizza';
 import Profile from './pages/Profile/Profile';
@@ -31,6 +32,7 @@ const App = () => {
                       <Route path="/" element={<Home />} />
                       <Route path="/cart" element={<Cart />} />
                       <Route path="/pizza/:pizzaId" element={<Pizza />} />
+                      <Route path="/productos/:categoria" element={<Productos />} />
                       <Route
                         path="/profile"
                         element={token ? <Profile /> : <Navigate to="/login" replace />}
