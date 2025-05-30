@@ -70,7 +70,7 @@ const register = async (req, res) => {
 
     const existingUser = await authModel.getUserByEmail(email);
     if (existingUser) {
-      return res.status(400).json({ error: "User already exists" });
+      return res.status(400).json({ message: "El correo ya está registrado" });
     }
 
     const newUser = {
