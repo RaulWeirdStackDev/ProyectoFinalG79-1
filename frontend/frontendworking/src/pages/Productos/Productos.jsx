@@ -1,14 +1,14 @@
 import { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { PizzaContext } from '../../context/PizzaContext';
+import { ProductosContext } from '../../context/ProductosContext';
 import { CartContext } from '../../context/CartContext';
-import CardPizza from "../../components/CardPizza/CardPizza";
+import CardItem from "../../components/CardItem/CardItem";
 import Iconos from "../../components/Iconos/Iconos";
 import './Productos.css'; 
 
 const Productos = () => {
   const { categoria } = useParams();
-  const { allproductos } = useContext(PizzaContext);
+  const { allproductos } = useContext(ProductosContext);
   const { addToCart } = useContext(CartContext);
 
   const productosFiltrados = allproductos.filter(p => 
@@ -26,7 +26,7 @@ const Productos = () => {
       {productosFiltrados.length ? (
         <div className="productos-list" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
           {productosFiltrados.map(producto => (
-            <CardPizza
+            <CardItem
               key={producto.id}
               {...producto}
               addToCart={() => addToCart(producto)} 
