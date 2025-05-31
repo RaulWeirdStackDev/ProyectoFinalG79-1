@@ -1,7 +1,8 @@
 import { Router }  from "express";
-import { getAllRoll } from "../src/controllers/rol.controller.js";
+import { readAllRol } from "../src/controllers/rol.controller.js";
 
 const router = Router()
 
-router.get('/rol', getAllRoll)
+router.get('/rol', readAllRol)
+// router.get('/rol', readAllRol)
 export default router
