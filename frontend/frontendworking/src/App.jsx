@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home/Home';
@@ -7,11 +6,11 @@ import RegisterPage from './pages/RegisterPage/RegisterPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import Productos from './pages/Productos/Productos';
 import Cart from './pages/Cart/Cart';
-import Pizza from './pages/Pizza/Pizza';
+import ItemDetails from './pages/ItemDetails/ItemDetails';
 import Profile from './pages/Profile/Profile';
 import NotFound from './pages/NotFound/NotFound';
 import Footer from './pages/Footer/Footer';
-import PizzaProvider from './context/PizzaContext';
+import ProductosProvider from './context/ProductosContext';
 import CartProvider from './context/CartContext';
 import UserProvider, { UserContext } from './context/UserContext';
 
@@ -20,7 +19,7 @@ import UserProvider, { UserContext } from './context/UserContext';
 const App = () => {
   return (
     <UserProvider>
-      <PizzaProvider>
+      <ProductosProvider>
         <CartProvider>
           <BrowserRouter>
             <div className="min-vh-100 d-flex flex-column">
@@ -31,7 +30,7 @@ const App = () => {
                     <Routes>
                       <Route path="/" element={<Home />} />
                       <Route path="/cart" element={<Cart />} />
-                      <Route path="/pizza/:pizzaId" element={<Pizza />} />
+                      <Route path="/itemdetails/:itemId" element={<ItemDetails />} />
                       <Route path="/productos/:categoria" element={<Productos />} />
                       <Route
                         path="/profile"
@@ -60,7 +59,7 @@ const App = () => {
             </div>
           </BrowserRouter>
         </CartProvider>
-      </PizzaProvider>
+      </ProductosProvider>
     </UserProvider>
   );
 };
