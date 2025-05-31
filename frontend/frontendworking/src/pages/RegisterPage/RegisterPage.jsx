@@ -2,17 +2,25 @@ import React, { useState, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { validateCredentials } from '../../components/Tools/loginRegisterTools';
 import { UserContext } from '../../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const { register } = useContext(UserContext); // Obtengo el método register del contexto.
+  const { register } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateCredentials(email, password, confirmPassword)) {
-      await register(email, password); // Llamo al método register con las credenciales.
+      const success = await register(nombre, apellido, email, password);
+      if (success) {
+        navigate('/login'); // ✅ Redirige tras éxito
+      }
     }
   };
 
@@ -21,6 +29,26 @@ const RegisterPage = () => {
       <div className="card p-3" style={{ width: '20rem' }}>
         <h2 className="text-center mb-4">Registro</h2>
         <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label>Nombre:</label>
+            <input
+              type="text"
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label>Apellido:</label>
+            <input
+              type="text"
+              value={apellido}
+              onChange={(e) => setApellido(e.target.value)}
+              className="form-control"
+              required
+            />
+          </div>
           <div className="mb-3">
             <label>Email:</label>
             <input

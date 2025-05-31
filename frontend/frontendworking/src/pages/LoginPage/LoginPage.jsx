@@ -6,12 +6,12 @@ import { UserContext } from '../../context/UserContext';
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { login } = useContext(UserContext); // Traigo el método login del contexto.
+  const { login } = useContext(UserContext); // Traigo login del contexto
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateCredentials(email, password)) {
-      await login(email, password); // Llamo al método login con las credenciales del usuario.
+      await login(email, password); 
     }
   };
 

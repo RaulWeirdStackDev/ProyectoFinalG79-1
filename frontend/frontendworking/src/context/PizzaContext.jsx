@@ -3,16 +3,16 @@ import { createContext, useState, useEffect } from "react";
 export const PizzaContext = createContext();
 
 const PizzaProvider = ({ children }) => {
-    const [pizzas, setPizzas] = useState([]);
+    const [allproductos, setPizzas] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/pizzas")
+        fetch("http://localhost:5000/api/productos")
             .then((res) => res.json())
             .then((data) => setPizzas(data));
     }, []);
 
     return (
-        <PizzaContext.Provider value={{ pizzas }}>
+        <PizzaContext.Provider value={{ allproductos }}>
             {children}
         </PizzaContext.Provider>
     );

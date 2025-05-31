@@ -35,19 +35,27 @@ const login = async (req, res) => {
     const payload = { email, id: user.id };
     const token = jwt.sign(payload, process.env.JWT_SECRET);
 
-    return res.json({ email, token });
+    return res.json({
+      email,
+      nombre: user.nombre,
+      apellido: user.apellido,
+      rut: user.rut,
+      url: user.url,
+      token,
+    });
   } catch (error) {
-    // console.log(error);
     return res.status(500).json({ error: "Server error" });
   }
 };
 
 const register = async (req, res) => {
   try {
-    const { email = "", password = "" } = req.body;
+    const { nombre = "", apellido = "", email = "", password = "" } = req.body;
 
-    if (!email.trim() || !password.trim()) {
-      return res.status(400).json({ error: "Email and password are required" });
+    if (!nombre.trim() || !apellido.trim() || !email.trim() || !password.trim()) {
+      return res.status(400).json({
+        error: "Nombre, apellido, email y contraseña son requeridos",
+      });
     }
 
     if (!isValidEmail(email)) {
@@ -55,24 +63,33 @@ const register = async (req, res) => {
     }
 
     if (password.length < 6) {
-      return res
-        .status(400)
-        .json({ error: "Password must be at least 6 characters" });
+      return res.status(400).json({
+        error: "Password must be at least 6 characters",
+      });
     }
 
-    const user = await authModel.getUserByEmail(email);
-    if (user) {
-      return res.status(400).json({ error: "User already exists" });
+    const existingUser = await authModel.getUserByEmail(email);
+    if (existingUser) {
+      return res.status(400).json({ message: "El correo ya está registrado" });
     }
-    const newUser = { email, password, id: nanoid() };
+
+    const newUser = {
+      id: nanoid(),
+      nombre,
+      apellido,
+      email,
+      password,
+      rut: "", // preparado para uso futuro
+      url: "", // preparado para uso futuro
+    };
+
     await authModel.addUser(newUser);
 
     const payload = { email, id: newUser.id };
     const token = jwt.sign(payload, process.env.JWT_SECRET);
 
-    return res.json({ email, token });
+    return res.json({ email, nombre, apellido, token });
   } catch (error) {
-    // console.log(error);
     return res.status(500).json({ error: "Server error" });
   }
 };
@@ -81,9 +98,15 @@ const me = async (req, res) => {
   try {
     const { email } = req.user;
     const user = await authModel.getUserByEmail(email);
-    return res.json({ email, id: user.id });
+    return res.json({
+      email,
+      id: user.id,
+      nombre: user.nombre,
+      apellido: user.apellido,
+      rut: user.rut,
+      url: user.url,
+    });
   } catch (error) {
-    // console.log(error);
     return res.status(500).json({ error: "Server error" });
   }
 };
