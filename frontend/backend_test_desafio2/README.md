@@ -19,13 +19,13 @@ npm run dev
 ### Pizzas
 
 ```sh
-GET /api/pizzas
+GET /api/productos/:categoria
 ```
 
 ### Pizza (única)
 
 ```sh
-GET /api/pizzas/:id
+GET /api/itemdetails/:id
 ```
 
 ### Auth
@@ -39,11 +39,7 @@ body:
 
 ```json
 [
-  {
-    "email": "test@test.com",
-    "password": "123123",
-  },
-  {
+{
     "email": "eaoo88@gmail.com",
     "password": "123123",
   }

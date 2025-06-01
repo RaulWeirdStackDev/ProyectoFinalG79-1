@@ -25,17 +25,17 @@ const ItemDetails = () => {
   return (
     <div className="container mt-4 d-flex flex-column align-items-center justify-content-center">
       <h2>{producto.name}:</h2>
-      <p 
-  className="text-white text-center p-3 rounded w-100"
-  style={{ backgroundColor: "#294168" }}
->
-  {producto.desc}
-</p>
-      <CardItem 
-        {...producto} 
-        addToCart={() => addToCart(producto)} 
+      <CardItem
+        {...producto}
+        addToCart={() => addToCart(producto)}
         hideVerMas={true}
       />
+      <p
+        className="text-white text-center p-3 rounded w-100"
+        style={{ backgroundColor: "#294168" }}
+      >
+        {producto.desc}
+      </p>
     </div>
   );
 };

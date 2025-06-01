@@ -1,19 +1,13 @@
 import { Link } from 'react-router-dom'; 
 import './CardItem.css';
 
-const CardItem = ({ id, name, price, ingredients, img, addToCart, hideVerMas }) => (
+const CardItem = ({ id, name, price, ingredients, estado, idioma, img, addToCart, hideVerMas }) => (
   <div className="card card-item">
     <img src={img} alt={name} className="card-img-top" />
     <div className="card-body d-flex flex-column justify-content-between">
       <h2 className="card-title mb-2">{name}.</h2>
-      <div>
-        <p className="mb-1">🍕 Ingredientes:</p>
-        <ul className="m-0 ingredients-list">
-          {ingredients.map((ingredient) => (
-            <li key={ingredient}>{ingredient}.</li>
-          ))}
-        </ul>
-      </div>
+      <h6>Idioma: {idioma}.<br />
+      Estado: {estado}.</h6>
       <h4 className="text-center">
         Precio: ${price.toLocaleString()}
       </h4>
