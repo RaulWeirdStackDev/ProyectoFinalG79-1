@@ -16,19 +16,6 @@
 }
 
 
-.ingredients-list {
-  padding: 0;
-  margin: 0;
-  list-style-type: disc;
-  text-align: left;
-}
-
-.ingredients-list li {
-  text-transform: capitalize;
-  padding: 0;
-  margin-left: 20px;
-}
-
 .pdesc {
   text-align: justify;
 }

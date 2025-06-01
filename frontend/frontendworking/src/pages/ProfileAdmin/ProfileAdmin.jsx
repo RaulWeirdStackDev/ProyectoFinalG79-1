@@ -1,7 +1,7 @@
 import { Button, Image } from "react-bootstrap"
-import "./perfilAdmin.css"
+import "./ProfileAdmin.css"
 
-export const PerfilAdmin = () => {
+export const ProfileAdmin = () => {
   return (
     <div className="perfil-container">
       <h2 className="perfil-title">Mi perfil:</h2>

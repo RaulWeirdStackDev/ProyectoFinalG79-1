@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Image } from "react-bootstrap";
 import { UserContext } from "../../context/UserContext";
-import profilePhoto from "../../assets/images/Perfil_example.jpg"; // Importa tu imagen por defecto
-import "./perfilUsuario.css";
+import profilePhoto from "../../assets/images/Perfil_example.jpg";
+import "./profile.css";
 
 const PerfilUsuario = () => {
-  const { logout, userData } = useContext(UserContext); // Traigo logout y userData
+  const { logout, userData } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const PerfilUsuario = () => {
       <h2 className="perfil-title">Mi perfil:</h2>
 
       <div className="perfil-main-content">
-        {/* Columna izquierda - Solo imagen */}
+        {/* Imagen a la izquierda */}
         <div className="perfil-left-section">
           <div className="perfil-image-container">
             <Image
@@ -34,7 +34,7 @@ const PerfilUsuario = () => {
           </div>
         </div>
 
-        {/* Columna derecha - Info y botones */}
+        {/* Información a la derecha */}
         <div className="perfil-right-section">
           <div className="perfil-info">
             <div className="info-item">
@@ -44,12 +44,11 @@ const PerfilUsuario = () => {
             <div className="info-item">
               RUT/ID: {userData.rut ? userData.rut : "No disponible"}
             </div>
-            {/* Puedes agregar más campos aquí si los tienes */}
           </div>
         </div>
       </div>
 
-      {/* Botones centrados */}
+      {/* Botones debajo, centrados */}
       <div className="perfil-buttons">
         <Button className="btn-azul">Editar perfil</Button>
         <Button className="btn-azul">Ordenes</Button>
