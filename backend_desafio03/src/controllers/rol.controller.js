@@ -1,5 +1,4 @@
 import { createRolModel, readAllRolModel, readRolActivoModel, updateRolModel } from "../models/rol.model.js"
-// import jwt from 'jsonwebtoken'
 
 export const createRol = async (req, res) => {
     try {
@@ -14,10 +13,6 @@ export const createRol = async (req, res) => {
 
 export const readAllRol = async (req, res) => {
     try {
-        const token = req.header('Authorization')
-        if (!token) {
-            return res.status(400).json({ message: 'El token debe estar presente' })
-        }
         const data = await readAllRolModel()
         res.status(200).json({ data })
     } catch (error) {
@@ -28,10 +23,6 @@ export const readAllRol = async (req, res) => {
 
 export const readRolActivo = async (req, res) => {
     try {
-        const token = req.header('Authorization')
-        if (!token) {
-            return res.status(400).json({ message: 'El token debe estar presente' })
-        }
         const data = await readRolActivoModel()
         res.status(200).json({ data })
     } catch (error) {
@@ -42,10 +33,6 @@ export const readRolActivo = async (req, res) => {
 
 export const updateRol = async (req, res) => {
     try {
-        // const token = req.header('Authorization')
-        // if (!token) {
-        //     return res.status(400).json({ message: 'El token debe estar presente' })
-        // }
         const {id} = req.params
         const {descripcion, estado } = req.body
         const result = await updateRolModel(id, descripcion, estado)
