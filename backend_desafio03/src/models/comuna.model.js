@@ -14,7 +14,7 @@ export const readAllComunaModel = async () => {
 }
 
 export const updateComunanModel = async (id, descripcion) => {
-    const sqlQuery = 'UPDATE comuna SET descripcion = $2 WHERE id_region = $1 RETURNING *'
+    const sqlQuery = 'UPDATE comuna SET descripcion = $2 WHERE id_comuna = $1 RETURNING *'
     const values = [id, descripcion]
     const response = await pool.query(sqlQuery, values)
     return response.rows
