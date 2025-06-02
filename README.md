@@ -1,4 +1,4 @@
-✍️ Autores: Enrique Ojeda, Darwin Zamarca y Raúl Rodríguez.
+## ✍️ Autores: Enrique Ojeda, Darwin Zamarca y Raúl Rodríguez.
 
 ProyectoFinalG79-1/
 ├── frontend/
