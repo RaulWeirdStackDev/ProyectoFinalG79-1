@@ -1,11 +1,14 @@
 ## ✍️ Autores: Enrique Ojeda, Darwin Zamarca y Raúl Rodríguez.
 
 ProyectoFinalG79-1/
-├── frontend/
-│ ├── frontend_desafio02/ # Proyecto React con React Router y Context.
-│ └── backend_test_desafio2/ # Servidor Node.js para pruebas de requerimientos.
-├── backend_desafio03/ # (En desarrollo) Backend para hitos posteriores.
 
+├── frontend/
+
+│ ├── frontend_desafio02/ # Proyecto React con React Router y Context.
+
+│ └── backend_test_desafio2/ # Servidor Node.js para pruebas de requerimientos.
+
+├── backend_desafio03/ # (En desarrollo) Backend para hitos posteriores.
 
 ## 🚀 Hito 2 - Implementado
 
