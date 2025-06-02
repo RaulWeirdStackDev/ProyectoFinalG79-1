@@ -1,0 +1,23 @@
+Para el hito2 tenemos todo cargado en la carpeta "frontend", 
+adentro se puede encontrar frontend_desafio02 y un backendtest_desafio02, el cual esta hecho para probar los requerimientos:
+Requerimientos:
+1. Crear un nuevo proyecto usando npx e instalar las dependencias.
+(1 Punto)
+2. Utilizar React Router para la navegación entre rutas.
+(3 Puntos)
+3. Reutilizar componentes haciendo uso del paso de props y renderización dinámica.
+(1 Punto)
+4. Hacer uso de los hooks para un desarrollo ágil y reactivo.
+(2 Puntos)
+5. Utilizar Context para el manejo del estado global.
+(3 Puntos)
+
+Para probar:
+ProyectoFinalG79-1\frontend\frontend_desafio02> npm install
+ProyectoFinalG79-1\frontend\frontend_desafio02>  npm run dev
+ProyectoFinalG79-1\frontend\backend_test_desafio2> npm install
+ProyectoFinalG79-1\frontend\backend_test_desafio2> npm start
+
+
+Nota: falta integrar funcionalidades para hitos posteriores hito 04 y 05. 
+Ignore la carpeta backend_desafio03 aun estamos trabajando en ella.
