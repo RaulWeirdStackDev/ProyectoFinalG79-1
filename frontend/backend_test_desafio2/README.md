@@ -16,13 +16,13 @@ npm run dev
 
 ## Endpoints
 
-### Pizzas
+### Productos
 
 ```sh
 GET /api/productos/:categoria
 ```
 
-### Pizza (única)
+### Producto (único)
 
 ```sh
 GET /api/itemdetails/:id
