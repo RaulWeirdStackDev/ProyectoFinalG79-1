@@ -1,9 +1,9 @@
-import { createRolModel, readAllRolModel, readRolActivoModel, updateRolModel } from "../models/rol.model.js"
+import { createCategoriaModel, readAllCategoriaModel, readCategoriaActivoModel, updateCategoriaModel } from "../models/categoria.model.js"
 
-export const createRol = async (req, res) => {
+export const createCategoria = async (req, res) => {
     try {
         const { descripcion } = req.body
-        const result = await createRolModel(descripcion)
+        const result = await createCategoriaModel(descripcion)
         res.status(200).json({ user: result })
     } catch (error) {
         res.status(500).json({ error: 'Error al procesar la solicitud' })
@@ -11,9 +11,9 @@ export const createRol = async (req, res) => {
     }
 }
 
-export const readAllRol = async (req, res) => {
+export const readAllCategoria = async (req, res) => {
     try {
-        const data = await readAllRolModel()
+        const data = await readAllCategoriaModel()
         res.status(200).json({ data })
     } catch (error) {
         res.status(500).json({ error: 'Error al procesar la solicitud' })
@@ -21,9 +21,9 @@ export const readAllRol = async (req, res) => {
     }
 }
 
-export const readRolActivo = async (req, res) => {
+export const readCategoriaActivo = async (req, res) => {
     try {
-        const data = await readRolActivoModel()
+        const data = await readCategoriaActivoModel()
         res.status(200).json({ data })
     } catch (error) {
         res.status(500).json({ error: 'Error al procesar la solicitud' })
@@ -31,11 +31,11 @@ export const readRolActivo = async (req, res) => {
     }
 }
 
-export const updateRol = async (req, res) => {
+export const updateCategoria = async (req, res) => {
     try {
         const {id} = req.params
         const {descripcion, estado } = req.body
-        const result = await updateRolModel(id, descripcion, estado)
+        const result = await updateCategoriaModel(id, descripcion, estado)
         res.status(200).json({ user: result })
     } catch (error) {
         res.status(500).json({ error: 'Error al procesar la solicitud' })

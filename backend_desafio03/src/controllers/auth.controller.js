@@ -21,7 +21,7 @@ export const loginUser = async (req, res) => {
 
         //generar el TOKERN
         //1h= 1 hora  1d = 1 día  1y= 1 año  340d= 340 daias  120d
-        const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '120s' })
+        const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '1200s' })
         const { password: _, ...userWithoutPass } = user
         res.status(200).json({ token, userWithoutPass })
     } catch (error) {
