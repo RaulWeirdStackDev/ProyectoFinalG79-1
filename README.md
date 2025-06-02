@@ -31,12 +31,16 @@ Todos los requisitos del Hito 2 están implementados en la carpeta `frontend/fro
 
 ### Frontend
 cd frontend/frontend_desafio02
+
 npm install
+
 npm run dev
 
 ### Backend
 cd frontend/backend_test_desafio2
+
 npm install
+
 npm start
 
 ⚠️ Notas
