@@ -1,5 +1,4 @@
-import { createUserModel, findUserByIdModel } from "../models/user.model.js"
-
+import { createUserModel, findUserByIdModel, updateUserModel } from "../models/user.model.js"
 
 export const createUser = async (req, res)=>{
     try {
@@ -8,7 +7,7 @@ export const createUser = async (req, res)=>{
         res.status(200).json({user: result})
     } catch (error) {
         res.status(500).json({error: 'Error al procesar la solicitud'})
-        console.error('ERROR =>', error)
+        console.error('ERROR_CONTROLLER_CREATE =>', error)
     }
 }
 
@@ -24,6 +23,22 @@ export const getUserById = async(req,res)=>{
             .json(!data? {error: 'Data not found'}:{data})
     } catch (error) {
         res.status(500).json({error: 'Error al procesar la solicitud'})
-        console.log('ERROR =>', error.message)
+        console.log('ERROR_CONTROLLER_READ =>', error.message)
+    }
+}
+
+export const updateUser = async (req, res)=>{
+    try {
+        const {id} = req.params
+        const {nombre, apellido, password} = req.body
+        if(!password){
+            const data = await findUserByIdModel(id)
+            password = data.password
+        }
+        const result = await updateUserModel(id, nombre, apellido, password)
+        res.status(200).json({user: result})
+    } catch (error) {
+        res.status(500).json({error: 'Error al procesar la solicitud'})
+        console.error('ERROR_CONTROLLER_UPDATE =>', error)
     }
 }
