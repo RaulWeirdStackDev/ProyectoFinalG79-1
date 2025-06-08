@@ -70,8 +70,8 @@ CREATE TABLE producto (
     idioma VARCHAR(50) NOT NULL,
     precio_venta NUMERIC(10, 0) NOT NULL,
     descuento NUMERIC(10, 0) NOT NULL DEFAULT 0,
-    img MAX NOT NULL,
-    estado TYPE VARCHAR(10) NOT NULL,
+    img TEXT NOT NULL,
+    estado VARCHAR(10) NOT NULL,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -131,6 +131,21 @@ VALUES
     ('Administrador'),
     ('Estandar');
 
+-- Insertar regiones
+INSERT INTO region (descripcion) 
+VALUES 
+    ('ARICA Y PATINACOTA'),
+    ('METROPOLITANA'),
+    ('LOS LAGOS'),
+    ('ANTOFAGASTA');
+
+-- Insertar comunas
+INSERT INTO comuna (descripcion) 
+VALUES 
+    ('SANTIAGO'),
+    ('PROVIDENCIA'),
+    ('LAS CONDES'),
+    ('VIÑA DEL MAR');
 -- Insertar categorías
 INSERT INTO categoria (descripcion)
 VALUES 
@@ -180,13 +195,13 @@ VALUES
 
 (4, 'Cloud, Midgar Mercenary', 'When Cloud enters, search your library for an Equipment card, reveal it, put it into your hand, then shuffle. As long as Cloud is equipped, if an ability of Cloud or an Equipment attached to it triggers, that ability triggers an additional time.', 'Inglés EN', 21500, 'https://cards.scryfall.io/large/front/2/c/2cf7e8a3-fad7-413d-b17c-7519a9cf5fb5.jpg?1748705791', 'NM'),
 
-(5, 'Commander box', 'Box para 100 cartas con hasta doble forro, también se puede colocar el comandante a la vista', 'N/A', 9990, 'https://img.kwcdn.com/product/fancy/5c86047e-91ea-4cfd-8cae-efa8543fe454.jpg?imageMogr2/auto-orient%7CimageView2/2/w/800/q/70/format/webp', 1),
+(5, 'Commander box', 'Box para 100 cartas con hasta doble forro, también se puede colocar el comandante a la vista', 'N/A', 9990, 'https://img.kwcdn.com/product/fancy/5c86047e-91ea-4cfd-8cae-efa8543fe454.jpg?imageMogr2/auto-orient%7CimageView2/2/w/800/q/70/format/webp', 'NM'),
 
 (6, 'Bundle MTG Final Fantasy', 'Bundle con 9 sobres playboosters, 1 dado promocional y cartas promocionales', 'Inglés EN', 89990, 'https://cdnx.jumpseller.com/vudu-gaming/image/62983067/thumb/1079/1079?1745861019', 'NM'),
 
-(7, 'Figura de Luffy', 'Figura coleccionable de luffy gear5 - no articulada, esta ehcha de PVC', 'N/A', 13990, 'https://down-cl.img.susercontent.com/file/sg-11134201-7qvfz-ljmoubsw12it3e', 1),
+(7, 'Figura de Luffy', 'Figura coleccionable de luffy gear5 - no articulada, esta ehcha de PVC', 'N/A', 13990, 'https://down-cl.img.susercontent.com/file/sg-11134201-7qvfz-ljmoubsw12it3e', 'NM'),
 
-(8, 'Peluche de Pikachu', 'Peluche de 40cm de alto, hecho de algodón suave al tacto, ideal para cualquier edad', 'N/A', 19990, 'https://home.ripley.cl/store/Attachment/WOP/D175/2000400187835/2000400187835-4.jpg', 1),
+(3, 'Peluche de Pikachu', 'Peluche de 40cm de alto, hecho de algodón suave al tacto, ideal para cualquier edad', 'N/A', 19990, 'https://home.ripley.cl/store/Attachment/WOP/D175/2000400187835/2000400187835-4.jpg', 'NM'),
 
-(9, 'Zelda - Tears of the kingdom', 'The legend of Zelda - Tears of the kingdom, esta versión es la de Switch2, incluye mejoras visuales y de rendimiento', 'Multilenguaje', 79990, 'https://sniper.cl/cdn/shop/files/totknsw2.webp?v=1746163418', 1);
+(3, 'Zelda - Tears of the kingdom', 'The legend of Zelda - Tears of the kingdom, esta versión es la de Switch2, incluye mejoras visuales y de rendimiento', 'Multilenguaje', 79990, 'https://sniper.cl/cdn/shop/files/totknsw2.webp?v=1746163418', 'NM');
 
