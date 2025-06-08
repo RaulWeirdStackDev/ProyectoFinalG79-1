@@ -64,7 +64,7 @@ const Cart = () => {
             <div key={item.id_producto} className="col-12 mb-4">
               <div className="d-flex flex-column flex-md-row align-items-center border p-3 rounded shadow-sm justify-content-between">
                 <img
-                  src={item.url}
+                  src={item.img}
                   alt={item.nombre}
                   className="img-fluid rounded mb-3 mb-md-0 item-img"
                 />

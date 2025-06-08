@@ -7,12 +7,12 @@ export const createProductoModel = async ({
   idioma,
   precio_venta,
   descuento = 0,
-  url,
+  img,
   estado = 1,
 }) => {
   const sqlQuery = `
     INSERT INTO producto (
-      id_categoria, nombre, descripcion, idioma, precio_venta, descuento, url, estado
+      id_categoria, nombre, descripcion, idioma, precio_venta, descuento, img, estado
     ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *
   `
   const values = [
@@ -22,7 +22,7 @@ export const createProductoModel = async ({
     idioma,
     precio_venta,
     descuento,
-    url,
+    img,
     estado,
   ]
   const response = await pool.query(sqlQuery, values)
@@ -60,7 +60,7 @@ export const updateProductoModel = async (id, datos) => {
     idioma,
     precio_venta,
     descuento,
-    url,
+    img,
     estado,
   } = datos
 
@@ -72,7 +72,7 @@ export const updateProductoModel = async (id, datos) => {
         idioma = $5,
         precio_venta = $6,
         descuento = $7,
-        url = $8,
+        img = $8,
         estado = $9
     WHERE id_producto = $1
     RETURNING *
@@ -85,7 +85,7 @@ export const updateProductoModel = async (id, datos) => {
     idioma,
     precio_venta,
     descuento,
-    url,
+    img,
     estado,
   ]
 

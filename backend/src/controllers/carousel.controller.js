@@ -2,8 +2,8 @@ import { createCarouselModel, deleteCarouselModel, readCarouselModel } from "../
 
 export const createCarousel = async (req, res) => {
     try {
-        const { url } = req.body
-        const result = await createCarouselModel(url)
+        const { img } = req.body
+        const result = await createCarouselModel(img)
         res.status(200).json({ data: result })
     } catch (error) {
         res.status(500).json({ error: 'Error al procesar la solicitud' })
