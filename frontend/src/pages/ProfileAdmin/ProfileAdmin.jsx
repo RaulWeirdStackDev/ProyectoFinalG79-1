@@ -27,7 +27,7 @@ const ProfileAdmin = () => {
         <div className="perfil-left-section">
           <div className="perfil-image-container">
             <Image
-              src={userData.url ? userData.url : profilePhoto}
+              src={userData.img ? userData.img : profilePhoto}
               alt="Foto de perfil"
               className="perfil-image"
             />

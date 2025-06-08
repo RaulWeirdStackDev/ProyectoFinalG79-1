@@ -1,8 +1,8 @@
 import pool from '../../db/config.js'
 
-export const createCarouselModel = async (url) => {
-    const sqlQuery = 'INSERT INTO carousel (url) VALUES ($1) RETURNING *'
-    const values = [url]
+export const createCarouselModel = async (img) => {
+    const sqlQuery = 'INSERT INTO carousel (img) VALUES ($1) RETURNING *'
+    const values = [img]
     const response = await pool.query(sqlQuery, values)
     return response.rows
 }

@@ -1,12 +1,6 @@
 -- Active: 1737596334296@@127.0.0.1@5432@proy001
 CREATE DATABASE proy001;
 \c proy001;
-CREATE TABLE rol (
-    id_rol SERIAL PRIMARY KEY,
-    descripcion VARCHAR(50) UNIQUE NOT NULL,
-    estado INT DEFAULT 1 NOT NULL
-);
-
 -- Crear tabla de roles
 CREATE TABLE rol (
     id_rol SERIAL PRIMARY KEY,
@@ -14,6 +8,12 @@ CREATE TABLE rol (
     estado INT DEFAULT 1 NOT NULL
 );
 
+-- Crea tabla de carousel
+CREATE TABLE carousel (
+    id_carousel SERIAL PRIMARY KEY,
+    img TEXT UNIQUE NOT NULL,
+    estado INT DEFAULT 1 NOT NULL
+);
 -- Crear tabla de regiones
 CREATE TABLE region(
     id_region SERIAL PRIMARY KEY,
@@ -70,7 +70,7 @@ CREATE TABLE producto (
     idioma VARCHAR(50) NOT NULL,
     precio_venta NUMERIC(10, 0) NOT NULL,
     descuento NUMERIC(10, 0) NOT NULL DEFAULT 0,
-    url VARCHAR(150) NOT NULL,
+    img MAX NOT NULL,
     estado TYPE VARCHAR(10) NOT NULL,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -174,7 +174,7 @@ SELECT * FROM producto;
 
 -- Insertar productos en producto:
 
-INSERT INTO producto (id_categoria, nombre, descripcion, idioma, precio_venta, url, estado)
+INSERT INTO producto (id_categoria, nombre, descripcion, idioma, precio_venta, img, estado)
 VALUES
 (4, 'Rhystic Study', 'Whenever an opponent casts a spell, you may draw a card unless that player pays {1}.', 'Inglés EN', 110000, 'https://cards.scryfall.io/large/front/e/6/e6a06aad-6073-465b-89d0-8c4ae4307aff.jpg?1692933103', 'NM'),
 

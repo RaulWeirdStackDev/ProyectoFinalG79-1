@@ -4,14 +4,14 @@ import { useContext } from 'react';
 import { FavoritesContext } from '../../context/FavoritesContext';
 
 const CardItem = ({ producto, addToCart, hideVerMas }) => {
-  const { id_producto, nombre, precio_venta, estado, idioma, url } = producto;
+  const { id_producto, nombre, precio_venta, estado, idioma, img } = producto;
 
   const { toggleFavorite, isFavorite } = useContext(FavoritesContext);
   const favorito = isFavorite(id_producto);
 
   return (
     <div className="card card-item">
-      <img src={url} alt={nombre} className="card-img-top" />
+      <img src={img} alt={nombre} className="card-img-top" />
       <div className="card-body d-flex flex-column justify-content-between">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="card-title mb-2">{nombre}</h2>
