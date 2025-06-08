@@ -43,3 +43,20 @@ export const findUserByIdModel = async(id_usuario) => {
     const response = await pool.query(sqlQuery)
     return response.rows[0]
 }
+
+export const updateUserModel = async (id, nombre, apellido, password)=>{
+    const hashedPassword = bcrypt.hashSync(password)
+    const sqlQuery = {
+        text : `UPDATE usuario 
+                SET nombre = $1,
+                    apellido = $2,
+                    password = $3
+                WHERE 
+                    id_user = $4
+                RETURNING nombre, apellido, email`,
+        values: [nombre, apellido, hashedPassword, id]
+    }
+    console.log(sqlQuery)
+    const response = await pool.query(sqlQuery)
+    return response.rows[0]
+}
