@@ -89,7 +89,7 @@ CREATE TABLE inventario(
     id_inventario SERIAL PRIMARY KEY,
     id_producto INT NOT NULL,
     precio_compra NUMERIC(10, 0) NOT NULL,
-    cantidad INT,
+    cantidad INT NOT NULL,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
 );
