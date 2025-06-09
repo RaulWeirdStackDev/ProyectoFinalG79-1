@@ -4,7 +4,7 @@ import { UserContext } from "../../context/UserContext";
 import profilePhoto from "../../assets/images/Perfil_example.jpg";
 import "./profile.css";
 
-const PerfilUsuario = () => {
+const Profile = () => {
   const { logout, userData } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
 
@@ -59,4 +59,4 @@ const PerfilUsuario = () => {
   );
 };
 
-export default PerfilUsuario;
+export default Profile;
