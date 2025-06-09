@@ -12,6 +12,6 @@ export const authMiddleware = (req, res, next) => {
         next()
     } catch (error) {
         console.error('ERROR_JWT =>', error)
-        return res.status(500).json({error: 'Error al procesar la solicitud'})
+        return res.status(400).json({error: 'Error al procesar la solicitud'})
     }
 };

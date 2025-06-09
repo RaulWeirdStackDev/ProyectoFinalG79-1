@@ -38,3 +38,5 @@ app.use('/api', ventaRoutes)
 console.log('Tipo:', typeof process.env.DB_PASSWORD, 'Valor:', process.env.DB_PASSWORD)
 
 app.listen(PORT, console.log(`🍒 Server http://localhost:${PORT}`))
+
+export default app
