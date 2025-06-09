@@ -107,8 +107,8 @@ CREATE TABLE usuario_producto(
 CREATE TABLE venta(
     id_venta SERIAL PRIMARY KEY,
     id_usuario INT NOT NULL,
-    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     descripcion VARCHAR(100),
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
 

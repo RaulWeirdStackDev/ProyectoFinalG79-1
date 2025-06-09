@@ -12,6 +12,7 @@ import comunaRoutes from './routes/comuna.routes.js'
 import direccionRoutes from './routes/direccion.routes.js'
 import productoRoutes from './routes/producto.routes.js'
 import inventarioRoutes from './routes/inventario.routes.js'
+import ventaRoutes from './routes/venta.routes.js'
 
 import { log } from './middleware/log.middleware.js'
 
@@ -32,6 +33,7 @@ app.use('/api',comunaRoutes)
 app.use('/api',direccionRoutes)
 app.use('/api', productoRoutes)
 app.use('/api', inventarioRoutes)
+app.use('/api', ventaRoutes)
 
 console.log('Tipo:', typeof process.env.DB_PASSWORD, 'Valor:', process.env.DB_PASSWORD)
 
