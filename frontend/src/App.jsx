@@ -50,6 +50,14 @@ const App = () => {
                           }
                         />
                         <Route
+                          path="/profile"
+                          element={
+                            token && userData?.rol?.id_rol !== 1
+                              ? <Profile />
+                              : <Navigate to="/login" replace />
+                          }
+                        />
+                        <Route
                           path="/profileadmin"
                           element={
                             token && userData?.rol?.id_rol === 1
@@ -60,10 +68,6 @@ const App = () => {
                         <Route
                           path="/register"
                           element={token ? <Navigate to="/" replace /> : <RegisterPage />}
-                        />
-                        <Route
-                          path="/login"
-                          element={token ? <Navigate to="/profile" replace /> : <LoginPage />}
                         />
                         <Route
                           path="/useroptions"
