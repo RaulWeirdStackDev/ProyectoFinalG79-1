@@ -18,14 +18,16 @@ const Navbar = () => {
         <div className="navbar-left"></div>
         <div className="navbar-center">
           <Link to="/" className="navbar-home-logo">
-            <img src={logoDrixel} alt="Drixel Store Logo" className="navbar-logo" />
+            <img src={logoDrixel} alt="Drixel Store Logo" className="navbar-logo" 
+             title="Home"/>
           </Link>
         </div>
 
         <div className="navbar-right-buttons">
           {token ? (
             <>
-              <Link to="/favoritos" className="nav-link">
+              <Link to="/favoritos" className="nav-link"
+               title="Mis favoritos">
                 ❤️
               </Link>
               <Link
@@ -36,14 +38,16 @@ const Navbar = () => {
                 }
                 className="icon-button"
               >
-                <img src={useron} alt="Usuario activo" className="icon-img" />
+                <img src={useron} alt="Usuario activo" className="icon-img"
+                 title="Mi perfil" />
               </Link>
               {userData?.nombre && (
                 <span className="navbar-username mx-2">
                   {userData.nombre}
                 </span>
               )}
-              <button onClick={logout} className="icon-button btn btn-link">
+              <button onClick={logout} className="icon-button btn btn-link"
+               title="Cerrar sesión">
                 📴
               </button>
             </>
@@ -52,7 +56,8 @@ const Navbar = () => {
               <img src={useroff} alt="Usuario apagado" className="icon-img" />
             </Link>
           )}
-          <Link to="/cart" className="total-button nav-link">
+          <Link to="/cart" className="total-button nav-link"
+           title="Mi carrito">
             🛒 ${total.toLocaleString()}&nbsp;
           </Link>
         </div>

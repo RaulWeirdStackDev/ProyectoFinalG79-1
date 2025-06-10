@@ -40,6 +40,7 @@ export const informationUser = async (req, res) => {
             nombre: user.nombre,
             apellido: user.apellido,
             rut: user.rut,
+            telefono: user.telefono,
             img: user.img,
             rol: {
                 id_rol: user.id_rol,

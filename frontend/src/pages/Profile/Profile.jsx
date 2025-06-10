@@ -1,12 +1,15 @@
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Image } from "react-bootstrap";
 import { UserContext } from "../../context/UserContext";
 import profilePhoto from "../../assets/images/Perfil_example.jpg";
 import "./profile.css";
 
+
 const Profile = () => {
   const { logout, userData } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (userData) {
@@ -41,14 +44,17 @@ const Profile = () => {
             </div>
             <div className="info-item">Mail: {userData.email}</div>
             <div className="info-item">
-              RUT/ID: {userData.rut ? userData.rut : "No disponible"}
+              RUT/ID: {userData.rut ? userData.rut : "No disponible."}
+            </div>
+             <div className="info-item">
+              Teléfono: {userData.telefono ? userData.telefono : "No disponible."}
             </div>
           </div>
         </div>
       </div>
 
       <div className="perfil-buttons">
-        <Button className="btn-azul">Editar perfil</Button>
+        <Button className="btn-azul" onClick={() => navigate("/profile/edit")}>Editar perfil</Button>
         <Button className="btn-azul">Ordenes</Button>
         <Button className="btn-azul">Direcciones</Button>
         <Button className="btn-cerrar" onClick={logout}>
