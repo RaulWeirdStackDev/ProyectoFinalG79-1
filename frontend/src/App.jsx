@@ -10,6 +10,7 @@ import Cart from './pages/Cart/Cart';
 import ItemDetails from './pages/ItemDetails/ItemDetails';
 import Profile from './pages/Profile/Profile';
 import ProfileAdmin from './pages/ProfileAdmin/ProfileAdmin';
+import EditProfile from "./pages/EditProfile/EditProfile";
 import NotFound from './pages/NotFound/NotFound';
 import Footer from './pages/Footer/Footer';
 import ProductosProvider from './context/ProductosContext';
@@ -65,6 +66,8 @@ const App = () => {
                               : <Navigate to="/login" replace />
                           }
                         />
+                        <Route path="/profile/edit" element={token ? <EditProfile /> :
+                          <Navigate to="/login" />} />
                         <Route
                           path="/register"
                           element={token ? <Navigate to="/" replace /> : <RegisterPage />}

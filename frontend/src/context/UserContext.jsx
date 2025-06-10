@@ -15,6 +15,15 @@ const UserProvider = ({ children }) => {
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
+  // ✅ NUEVA FUNCIÓN: actualiza datos del usuario en contexto y localStorage
+  const updateUserData = (newData) => {
+    setUserData((prev) => {
+      const updated = { ...prev, ...newData };
+      localStorage.setItem('user', JSON.stringify(updated));
+      return updated;
+    });
+  };
+
   const login = async (email, password) => {
     try {
       const response = await fetch('http://localhost:3000/api/auth/login', {
@@ -37,7 +46,7 @@ const UserProvider = ({ children }) => {
       });
 
       const user = await profileRes.json();
-      console.log("🧠 Usuario logueado:", user); // << Aquí veré lo roles, por si acaso.
+      console.log("🧠 Usuario logueado:", user);
       if (!profileRes.ok) {
         throw new Error(user?.message || 'No se pudo cargar el perfil.');
       }
@@ -46,13 +55,14 @@ const UserProvider = ({ children }) => {
       localStorage.setItem('user', JSON.stringify(user));
       showAlert('Éxito', 'Inicio de sesión exitoso.', 'success');
 
-      return user; // 🔥 DEVOLVEMOS USUARIO PARA SABER SU ROL
+      return user;
 
     } catch (error) {
       showAlert('Error', error.message, 'error');
       console.error('Error al iniciar sesión:', error.message);
     }
   };
+
   const register = async (nombre, apellido, email, password) => {
     const capitalize = (str) =>
       str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
@@ -73,10 +83,9 @@ const UserProvider = ({ children }) => {
         }),
       });
 
-      const data = await response.json(); // ✅ Obtener mensaje del backend incluso en error...
+      const data = await response.json();
 
       if (!response.ok) {
-        // ✅ Mostrar mensaje específico si el correo ya existe...
         const errorMessage = data?.message || 'Error al registrar usuario.';
         showAlert('Error', errorMessage, 'error');
         throw new Error(errorMessage);
@@ -132,8 +141,9 @@ const UserProvider = ({ children }) => {
     }
   }, [token, userData]);
 
+  // ✅ Incluimos updateUserData en el contexto
   return (
-    <UserContext.Provider value={{ token, login, register, logout, userData }}>
+    <UserContext.Provider value={{ token, login, register, logout, userData, updateUserData }}>
       {children}
     </UserContext.Provider>
   );
