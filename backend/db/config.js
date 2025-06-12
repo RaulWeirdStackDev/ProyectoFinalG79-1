@@ -41,7 +41,5 @@ export const client = new Client({
     ssl: { rejectUnauthorized: false }
 });
 
-client.connect()
-    .then(() => console.log("✅ Conectado correctamente"))
-    .catch(err => console.error("❌ Error conectando a DB:", err));
+
 
