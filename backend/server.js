@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import 'dotenv/config'
 
-// import userRoutes from './routes/user.routes.js'
+import userRoutes from './routes/user.routes.js'
 // import authRoutes from './routes/auth.routes.js'
 // import rolRoutes from './routes/rol.routes.js'
 // import categoriaRoutes from './routes/categoria.routes.js'
@@ -15,6 +15,7 @@ import 'dotenv/config'
 // import ventaRoutes from './routes/venta.routes.js'
 
 import { log } from './middleware/log.middleware.js'
+import { client } from './db/config.js'
 
 const PORT = process.env.PORT || 3000
 const app = express()
@@ -24,7 +25,7 @@ app.use(cors())
 app.use(log)
 
 // app.use('/api',authRoutes)
-// app.use('/api',userRoutes)
+app.use('/api',userRoutes)
 // app.use('/api',rolRoutes)
 // app.use('/api',categoriaRoutes)
 // app.use('/api',carouselRoutes)
@@ -37,6 +38,9 @@ app.use(log)
 
 // console.log('Tipo:', typeof process.env.DB_PASSWORD, 'Valor:', process.env.DB_PASSWORD)
 
-// app.listen(PORT, console.log(`🍒 Server http://localhost:${PORT}`))
+app.listen(PORT, console.log(`🍒 Server http://localhost:${PORT}`))
+client.connect()
+    .then(() => console.log("✅ Conectado correctamente"))
+    .catch(err => console.error("❌ Error conectando a DB:", err));
 
 export default app

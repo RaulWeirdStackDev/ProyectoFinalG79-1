@@ -1,4 +1,4 @@
-import pool from '../../db/config.js'
+import {client} from '../../db/config.js'
 import bcrypt from 'bcryptjs'
 
 export const createUserModel = async (nombre, apellido, email, password) => {
@@ -8,7 +8,7 @@ export const createUserModel = async (nombre, apellido, email, password) => {
       text: 'INSERT INTO usuario (nombre, apellido, email, password) VALUES ($1, $2, $3, $4) RETURNING nombre, apellido, email',
       values: [nombre, apellido, email, hashedPassword]
     };
-    const response = await pool.query(sqlQuery);
+    const response = await client.query(sqlQuery);
     return response.rows[0];
   } catch (error) {
     console.error('Error en createUserModel:', error);
@@ -26,7 +26,7 @@ export const findUserByEmailModel = async(email) => {
         `,
         values: [email]
     }
-    const response = await pool.query(sqlQuery)
+    const response = await client.query(sqlQuery)
     return response.rows[0]
 }
 
@@ -40,7 +40,7 @@ export const findUserByIdModel = async(id_usuario) => {
         `,
         values: [id_usuario]
     }
-    const response = await pool.query(sqlQuery)
+    const response = await client.query(sqlQuery)
     return response.rows[0]
 }
 
@@ -60,6 +60,6 @@ export const updateUserModel = async (id, nombre, apellido, password, rut, telef
     values: [nombre, apellido, password, rut, telefono, img, id]
   };
 
-  const response = await pool.query(sqlQuery);
+  const response = await client.query(sqlQuery);
   return response.rows[0];
 };
