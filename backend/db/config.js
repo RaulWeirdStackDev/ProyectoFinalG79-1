@@ -32,14 +32,16 @@ import 'dotenv/config'
 
 import { Client } from 'pg';
 
-export const client = new Client({
-    host: 'aws-0-sa-east-1.pooler.supabase.com',
-    port: 6543,
-    user: 'postgres.gompsqjkdyhfzvpdegdq',
-    password: 'D3s4f10ñ.RED', // No necesitas codificar aquí
-    database: 'postgres',
-    ssl: { rejectUnauthorized: false }
+const pool = new Client({
+  host: 'aws-0-sa-east-1.pooler.supabase.com',
+  port: 6543,
+  user: 'postgres.gompsqjkdyhfzvpdegdq',
+  password: 'D3s4f10ñ.RED',
+  database: 'postgres',
+  ssl: { rejectUnauthorized: false }
 });
+
+export default pool;
 
 
 
