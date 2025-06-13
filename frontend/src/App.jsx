@@ -12,6 +12,7 @@ import Profile from './pages/Profile/Profile';
 import ProfileAdmin from './pages/ProfileAdmin/ProfileAdmin';
 import EditProfile from "./pages/EditProfile/EditProfile";
 import CrearProducto from './pages/CrearProducto/CrearProducto';
+import EditProducto from './pages/EditProducto/EditProducto';
 import NotFound from './pages/NotFound/NotFound';
 import Footer from './pages/Footer/Footer';
 import ProductosProvider from './context/ProductosContext';
@@ -72,6 +73,14 @@ const App = () => {
                           element={
                             token && userData?.rol?.id_rol === 1
                               ? <CrearProducto />
+                              : <Navigate to="/login" replace />
+                          }
+                        />
+                        <Route
+                          path="/editproductos"
+                          element={
+                            token && userData?.rol?.id_rol === 1
+                              ? <EditProducto />
                               : <Navigate to="/login" replace />
                           }
                         />
