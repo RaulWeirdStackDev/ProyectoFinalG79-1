@@ -61,7 +61,9 @@ const ProfileAdmin = () => {
 
       <div className="perfil-buttons">
         {/* Botón extra solo para admin */}
-        <Button className="btn-verde">Crear publicación</Button>
+        <Button className="btn-verde" onClick={() => navigate("/crear-producto")}>
+          Crear publicación
+        </Button>
         <Button className="btn-azul" onClick={() => navigate("/profile/edit")}>Editar perfil</Button>
         <Button className="btn-azul">Ordenes</Button>
         <Button className="btn-azul">Direcciones</Button>

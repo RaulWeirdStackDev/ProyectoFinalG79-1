@@ -5,10 +5,9 @@ import Swal from 'sweetalert2';
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-  const [token, setToken] = useState(() => {
-    const savedToken = localStorage.getItem('token');
-    return savedToken ? JSON.parse(savedToken) : null;
-  });
+ 
+  const [token, setToken] = useState(() => localStorage.getItem('token'));
+
 
   const [userData, setUserData] = useState(() => {
     const savedUser = localStorage.getItem('user');
@@ -39,7 +38,7 @@ const UserProvider = ({ children }) => {
       }
 
       setToken(data.token);
-      localStorage.setItem('token', JSON.stringify(data.token));
+      localStorage.setItem('token', data.token);
 
       const profileRes = await fetch('http://localhost:3000/api/auth/me', {
         headers: { Authorization: `Bearer ${data.token}` },

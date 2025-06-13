@@ -6,6 +6,7 @@ import {
 } from "../models/producto.model.js"
 
 export const createProducto = async (req, res) => {
+    console.log('Llegó POST /api/producto con body:', req.body)
   try {
     const datosProducto = req.body
     const result = await createProductoModel(datosProducto)
