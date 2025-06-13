@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { ProductosContext } from '../../context/ProductosContext'
+import "./crearproducto.css";
 
 const CrearProducto = () => {
   const { categorias, refreshProductos } = useContext(ProductosContext)
@@ -106,8 +107,8 @@ const CrearProducto = () => {
   }
 
   return (
-    <div className="container my-5">
-      <div className="mx-auto p-4 bg-light shadow rounded" style={{ maxWidth: '600px' }}>
+    <div className="container-form">
+      <div className="container">
         <h2 className="text-center mb-4">Crear Producto</h2>
 
         {mensaje && (
@@ -205,7 +206,7 @@ const CrearProducto = () => {
             </div>
           )}
 
-          <button type="submit" className="btn btn-primary w-100 mt-3">
+          <button type="submit" className="btn btn-verde w-100 mt-3">
             Crear producto
           </button>
         </form>

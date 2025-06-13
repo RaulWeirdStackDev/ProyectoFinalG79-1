@@ -39,8 +39,8 @@ const ProductosProvider = ({ children }) => {
 
   useEffect(() => {
     fetchProductos()
-    fetchCategorias()
-  }, [])
+    if (token) fetchCategorias()
+  }, [token])
 
   return (
     <ProductosContext.Provider
@@ -54,3 +54,4 @@ const ProductosProvider = ({ children }) => {
     </ProductosContext.Provider>
   )
 }
+export default ProductosProvider;
