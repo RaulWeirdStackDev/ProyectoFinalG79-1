@@ -1,25 +1,56 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react"
+import { useContext } from "react"
+import { UserContext } from "./UserContext"
 
-export const ProductosContext = createContext();
+
+export const ProductosContext = createContext()
+
 
 const ProductosProvider = ({ children }) => {
-    const [allproductos, setProductos] = useState([]);
+  const [allproductos, setProductos] = useState([])
+  const [categorias, setCategorias] = useState([])
+  const { token } = useContext(UserContext)
+
+  const fetchProductos = async () => {
+    try {
+      const res = await fetch("http://localhost:3000/api/productos")
+      const data = await res.json()
+      console.log("Productos recibidos:", data)
+      setProductos(data)
+    } catch (error) {
+      console.error("Error al cargar productos:", error)
+    }
+  }
+
+  const fetchCategorias = async () => {
+    try {
+      const res = await fetch("http://localhost:3000/api/categorias", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      const data = await res.json()
+      console.log("Categorías recibidas:", data.data)
+      setCategorias(data.data)
+    } catch (error) {
+      console.error("Error al cargar categorías:", error)
+    }
+  }
 
   useEffect(() => {
-  fetch("http://localhost:3000/api/productos")
-    .then(res => res.json())
-    .then(data => {
-      console.log("Productos recibidos:", data);  // Aquí compruebo lo que llega.
-      setProductos(data);
-    })
-    .catch(error => console.error("Error al cargar productos:", error));
-}, []);
+    fetchProductos()
+    fetchCategorias()
+  }, [])
 
-    return (
-        <ProductosContext.Provider value={{ allproductos }}>
-            {children}
-        </ProductosContext.Provider>
-    );
-};
-
-export default ProductosProvider;
+  return (
+    <ProductosContext.Provider
+      value={{
+        allproductos,
+        categorias,
+        refreshProductos: fetchProductos, // ✅ ya está definida fuera del useEffect
+      }}
+    >
+      {children}
+    </ProductosContext.Provider>
+  )
+}

@@ -9,7 +9,7 @@ import {
 
 const router = Router()
 
-router.post('/producto', authMiddleware, createProducto)
+router.post('/producto',authMiddleware, createProducto)
 router.get('/productos', readAllProductos)
 router.get('/productos/:categoria', readProductosPorCategoria)
 router.patch('/producto/:id', authMiddleware, updateProducto)

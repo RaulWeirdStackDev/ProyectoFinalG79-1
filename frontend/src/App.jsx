@@ -11,6 +11,7 @@ import ItemDetails from './pages/ItemDetails/ItemDetails';
 import Profile from './pages/Profile/Profile';
 import ProfileAdmin from './pages/ProfileAdmin/ProfileAdmin';
 import EditProfile from "./pages/EditProfile/EditProfile";
+import CrearProducto from './pages/CrearProducto/CrearProducto';
 import NotFound from './pages/NotFound/NotFound';
 import Footer from './pages/Footer/Footer';
 import ProductosProvider from './context/ProductosContext';
@@ -63,6 +64,14 @@ const App = () => {
                           element={
                             token && userData?.rol?.id_rol === 1
                               ? <ProfileAdmin />
+                              : <Navigate to="/login" replace />
+                          }
+                        />
+                        <Route
+                          path="/crear-producto"
+                          element={
+                            token && userData?.rol?.id_rol === 1
+                              ? <CrearProducto />
                               : <Navigate to="/login" replace />
                           }
                         />
