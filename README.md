@@ -5,10 +5,18 @@
 
 El presente proyecto es una aplicación web FullStack para la tienda DrixelStore, consistente en una interfaz de usuario desarrollada con React y un servidor y API Rest con Node y Express. Se utiliza PostgreSQL para la gestión de bases de datos y JWT para fines de autenticación. 
 
+## 🏗️ Arquitectura
+
+- **React** para la creación de interfaces de usuario modernas
+- **React Router** para la navegación en una SPA (Single Page Application)
+- **React Bootstrap** framework de CSS con componentes reutilizables para la interfaz de usuario
+- **Express** para crear el servidor, definir rutas y middlewares
+- **PostgreSQL** para gestionar la base de datos
+- **JWT** para autenticación
+
 ProyectoFinalG79-1/
 
 ├── frontend/
-
 ├── backend/
 
 
