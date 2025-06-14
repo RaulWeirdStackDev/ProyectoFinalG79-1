@@ -17,6 +17,7 @@ El presente proyecto es una aplicación web FullStack para la tienda DrixelStore
 ProyectoFinalG79-1/
 
 ├── frontend/
+
 ├── backend/
 
 
