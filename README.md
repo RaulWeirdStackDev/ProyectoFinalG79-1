@@ -1,3 +1,6 @@
+![LOGODRIXEL2025](https://github.com/user-attachments/assets/14e27a51-ea05-421e-902d-f29dd703e550)
+
+
 ## DrixelStore: ✍️ Autores: Enrique Ojeda, Darwin Zamarca y Raúl Rodríguez.
 
 El presente proyecto es una aplicación web FullStack para la tienda DrixelStore, consistente en una interfaz de usuario desarrollada con React y un servidor y API Rest con Node y Express. Se utiliza PostgreSQL para la gestión de bases de datos y JWT para fines de autenticación. 
