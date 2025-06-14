@@ -37,7 +37,7 @@ const ProfileAdmin = () => {
           </div>
 
           {/* Botón extra solo para admin */}
-          <Button className="btn-azul" style={{ width: "100%", maxWidth: "280px", marginBottom: "1rem" }}>
+          <Button className="btn-azul mb-4 mt-2" onClick={() => navigate("/editproductos")}>
             Administrar publicaciones
           </Button>
         </div>

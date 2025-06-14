@@ -4,7 +4,7 @@ import {
     updateProductQuantity,
     calculateTotal,
     removeProduct,
-} from "../components/Tools/cartTools";
+} from "../Tools/cartTools";
 
 export const CartContext = createContext();
 
