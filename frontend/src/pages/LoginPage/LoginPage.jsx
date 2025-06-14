@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
-import { validateCredentials } from '../../components/Tools/loginRegisterTools';
+import { validateCredentials } from '../../Tools/loginRegisterTools';
 import { UserContext } from '../../context/UserContext';
 
 const LoginPage = () => {

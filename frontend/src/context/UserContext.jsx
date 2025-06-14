@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
-import { showAlert } from '../components/Tools/loginRegisterTools';
+import { showAlert } from '../Tools/loginRegisterTools';
 import Swal from 'sweetalert2';
 
 export const UserContext = createContext();

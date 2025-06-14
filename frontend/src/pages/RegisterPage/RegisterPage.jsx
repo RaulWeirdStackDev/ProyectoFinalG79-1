@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { validateCredentials } from '../../components/Tools/loginRegisterTools';
+import { validateCredentials } from '../../Tools/loginRegisterTools';
 import { UserContext } from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 
