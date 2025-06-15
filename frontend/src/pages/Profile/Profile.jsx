@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Image } from "react-bootstrap";
 import { UserContext } from "../../context/UserContext";
 import profilePhoto from "../../assets/images/Perfil_example.jpg";
-import "./profile.css";
+import "./Profile.css";
 
 
 const Profile = () => {
