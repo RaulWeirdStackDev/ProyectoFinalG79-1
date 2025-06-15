@@ -3,7 +3,7 @@ import './Iconos.css';
 import singleMtgImg from '../../assets/images/SINGLESBLACK.png';
 import accesoriosImg from '../../assets/images/ACCTCGBLACK.png';
 import selladosImg from '../../assets/images/SELLADOSTCGBLACK.png';
-import figurasImg from '../../assets/images/FIGBLACK.PNG';
+import figurasImg from '../../assets/images/FIGBLACK.png';
 import peluchesImg from '../../assets/images/PELUBLACK.png';
 import videojuegosImg from '../../assets/images/GAMESBLACK.png';
 
