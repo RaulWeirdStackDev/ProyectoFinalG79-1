@@ -19,6 +19,7 @@ import ProductosProvider from './context/ProductosContext';
 import CartProvider from './context/CartContext';
 import UserProvider, { UserContext } from './context/UserContext';
 import FavoritesProvider from './context/FavoritesContext';
+import UserAddress from './pages/UserOptions/UserAddress';
 
 const App = () => {
   return (
@@ -86,6 +87,9 @@ const App = () => {
                         />
                         <Route path="/profile/edit" element={token ? <EditProfile /> :
                           <Navigate to="/login" />} />
+                        
+                        <Route path="/profile/address" element={<UserAddress/>}/>
+
                         <Route
                           path="/register"
                           element={token ? <Navigate to="/" replace /> : <RegisterPage />}
