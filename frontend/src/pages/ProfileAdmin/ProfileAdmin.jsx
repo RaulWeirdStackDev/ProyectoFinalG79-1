@@ -66,7 +66,9 @@ const ProfileAdmin = () => {
         </Button>
         <Button className="btn-azul" onClick={() => navigate("/profile/edit")}>Editar perfil</Button>
         <Button className="btn-azul">Ordenes</Button>
-        <Button className="btn-azul">Direcciones</Button>
+        <Button className="btn-azul" onClick={() => navigate("/profile/address")}>
+          Direcciones
+        </Button>
         <Button className="btn-cerrar" onClick={logout}>
           Cerrar sesión
         </Button>

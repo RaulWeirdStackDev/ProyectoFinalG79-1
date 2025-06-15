@@ -13,13 +13,15 @@ import ProfileAdmin from './pages/ProfileAdmin/ProfileAdmin';
 import EditProfile from "./pages/EditProfile/EditProfile";
 import CrearProducto from './pages/CrearProducto/CrearProducto';
 import EditProducto from './pages/EditProducto/EditProducto';
+import MisDirecciones from "./pages/MisDirecciones/MisDirecciones";
+import NuevaDireccion from "./pages/NuevaDireccion/NuevaDireccion";
+import EditDireccion from "./pages/EditDireccion/EditDireccion";
 import NotFound from './pages/NotFound/NotFound';
 import Footer from './pages/Footer/Footer';
 import ProductosProvider from './context/ProductosContext';
 import CartProvider from './context/CartContext';
 import UserProvider, { UserContext } from './context/UserContext';
 import FavoritesProvider from './context/FavoritesContext';
-import UserAddress from './pages/UserOptions/UserAddress';
 
 const App = () => {
   return (
@@ -87,8 +89,27 @@ const App = () => {
                         />
                         <Route path="/profile/edit" element={token ? <EditProfile /> :
                           <Navigate to="/login" />} />
-                        
-                        <Route path="/profile/address" element={<UserAddress/>}/>
+
+                        <Route
+                          path="/profile/address"
+                          element={
+                            token
+                              ? <MisDirecciones />
+                              : <Navigate to="/login" replace />
+                          }
+                        />
+                        <Route
+                          path="/profile/address/new"
+                          element={token ? <NuevaDireccion /> : <Navigate to="/login" replace />}
+                        />
+                        <Route
+                          path="/profile/address/:id/edit"
+                          element={
+                            token
+                              ? <EditDireccion />
+                              : <Navigate to="/login" replace />
+                          }
+                        />
 
                         <Route
                           path="/register"
