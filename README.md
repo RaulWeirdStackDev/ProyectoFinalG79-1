@@ -1,4 +1,5 @@
-![LOGODRIXEL2025](https://github.com/user-attachments/assets/14e27a51-ea05-421e-902d-f29dd703e550)
+![image](https://github.com/user-attachments/assets/26b5440a-982e-4be1-a629-8441353e7de8)
+
 
 
 ## ✍️ Autores: Enrique Ojeda, Darwin Zamarca y Raúl Rodríguez.
