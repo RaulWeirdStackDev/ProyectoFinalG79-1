@@ -68,11 +68,12 @@ CREATE TABLE producto (
     id_categoria INT NOT NULL REFERENCES categoria(id_categoria),
     nombre VARCHAR(150) NOT NULL,
     descripcion TEXT,
-    idioma VARCHAR(50) NOT NULL,
+    idioma VARCHAR(50) NOT NULL DEFAULT "EN",
     precio_venta NUMERIC(10, 0) NOT NULL,
     descuento NUMERIC(10, 0) NOT NULL DEFAULT 0,
     img TEXT NOT NULL,
     estado VARCHAR(10) NOT NULL,
+    stock   INT NOT NULL DEFAULT 0,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -95,7 +96,7 @@ CREATE TABLE inventario(
     FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
 );
 
--- Crear tabla de productos por usuario
+-- Crear tabla de productos por usuario / FAVORITOS
 CREATE TABLE usuario_producto(
     id_usuario_producto SERIAL PRIMARY KEY,
     id_usuario INT NOT NULL,
@@ -206,3 +207,60 @@ VALUES
 
 (3, 'Zelda - Tears of the kingdom', 'The legend of Zelda - Tears of the kingdom, esta versión es la de Switch2, incluye mejoras visuales y de rendimiento', 'Multilenguaje', 79990, 'https://sniper.cl/cdn/shop/files/totknsw2.webp?v=1746163418', 'NM');
 
+/*
+** TRIGGER ACTUALIZA STOCK
+*/
+CREATE OR REPLACE FUNCTION actualizar_stock_producto()
+RETURNS TRIGGER AS $$
+BEGIN
+  -- Sumar la cantidad del nuevo inventario al stock actual
+  UPDATE producto
+  SET stock = stock + NEW.cantidad
+  WHERE id_producto = NEW.id_producto;
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+CREATE TRIGGER trg_actualizar_stock
+AFTER INSERT ON inventario
+FOR EACH ROW
+EXECUTE FUNCTION actualizar_stock_producto();
+
+CREATE OR REPLACE FUNCTION descontar_stock_producto()
+RETURNS TRIGGER AS $$
+BEGIN
+  -- Restar la cantidad eliminada del stock actual
+  UPDATE producto
+  SET stock = stock - OLD.cantidad
+  WHERE id_producto = OLD.id_producto;
+
+  RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_descontar_stock
+AFTER DELETE ON inventario
+FOR EACH ROW
+EXECUTE FUNCTION descontar_stock_producto();
+
+/*
+** TRIGGER STOCK
+** DESCUENTA AL HACER UNA VENTA
+*/
+
+CREATE OR REPLACE FUNCTION descontar_stock_por_venta()
+RETURNS TRIGGER AS $$
+BEGIN
+  -- Descontar la cantidad vendida del stock
+  UPDATE producto
+  SET stock = stock - NEW.cantidad
+  WHERE id_producto = NEW.id_producto;
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_descontar_stock_venta
+AFTER INSERT ON venta_detalle
+FOR EACH ROW
+EXECUTE FUNCTION descontar_stock_por_venta();
