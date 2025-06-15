@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Image } from "react-bootstrap";
 import { UserContext } from "../../context/UserContext";
 import profilePhoto from "../../assets/images/Perfil_example.jpg";
-import "./profile.css";
+import "./Profile.css";
 
 
 const Profile = () => {
@@ -56,7 +56,7 @@ const Profile = () => {
       <div className="perfil-buttons">
         <Button className="btn-azul" onClick={() => navigate("/profile/edit")}>Editar perfil</Button>
         <Button className="btn-azul">Ordenes</Button>
-        <Button className="btn-azul">Direcciones</Button>
+        <Button className="btn-azul" onClick={() => navigate("/profile/address")}>Direcciones</Button>
         <Button className="btn-cerrar" onClick={logout}>
           Cerrar sesión
         </Button>

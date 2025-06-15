@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { ProductosContext } from '../../context/ProductosContext'
-import "./crearproducto.css";
+import "./Crearproducto.css";
 
 const CrearProducto = () => {
   const { categorias, refreshProductos } = useContext(ProductosContext)
