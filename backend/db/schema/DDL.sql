@@ -21,9 +21,14 @@ CREATE TABLE region(
 );
 
 -- Crear tabla de comunas
-CREATE TABLE comuna(
-    id_comuna SERIAL PRIMARY KEY,
-    descripcion VARCHAR(50) UNIQUE NOT NULL
+CREATE TABLE comuna (
+  id_comuna SERIAL PRIMARY KEY,
+  descripcion VARCHAR(50) UNIQUE NOT NULL,
+  id_region INT NOT NULL,
+  CONSTRAINT fk_region
+    FOREIGN KEY (id_region)
+    REFERENCES region(id_region)
+    ON DELETE CASCADE
 );
 
 -- Crear tabla de usuarios
@@ -134,12 +139,24 @@ VALUES
     ('Estandar');
 
 -- Insertar regiones
-INSERT INTO region (descripcion) 
-VALUES 
-    ('ARICA Y PATINACOTA'),
-    ('METROPOLITANA'),
-    ('LOS LAGOS'),
-    ('ANTOFAGASTA');
+INSERT INTO region (id_region, descripcion) 
+VALUES
+(1, 'Arica y Parinacota'),
+(2, 'Tarapacá'),
+(3, 'Antofagasta'),
+(4, 'Atacama'),
+(5, 'Coquimbo'),
+(6, 'Valparaíso'),
+(7, 'Metropolitana de Santiago'),
+(8, 'Libertador General Bernardo O''Higgins'),
+(9, 'Maule'),
+(10, 'Ñuble'),
+(11, 'Biobío'),
+(12, 'La Araucanía'),
+(13, 'Los Ríos'),
+(14, 'Los Lagos'),
+(15, 'Aysén del General Carlos Ibáñez del Campo'),
+(16, 'Magallanes y de la Antártica Chilena');
 
 -- Insertar comunas
 INSERT INTO comuna (descripcion) 

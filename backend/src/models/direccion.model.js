@@ -25,7 +25,7 @@ export const getDireccionByIdDireccionModel = async (id) => {
 
 export const updateDireccionModel = async (id, direccion, numero, anexo, id_region, id_comuna) => {
     const sqlQuery = `UPDATE direccion 
-                        SET direcion = $2,
+                        SET direccion = $2,
                         numero = $3,
                         anexo = $4,
                         id_region = $5,

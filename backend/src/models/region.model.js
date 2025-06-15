@@ -8,10 +8,12 @@ export const createRegionModel = async (descripcion) => {
 }
 
 export const readAllRegionModel = async () => {
-    const sqlQuery = 'SELECT * FROM region'
-    const response = await pool.query(sqlQuery)
-    return response.rows
-}
+  const sqlQuery = `
+    SELECT * FROM region
+    ORDER BY descripcion ASC`;
+  const { rows } = await pool.query(sqlQuery);
+  return rows;
+};
 
 export const updateRegionModel = async (id, descripcion) => {
     const sqlQuery = 'UPDATE region SET descripcion = $2 WHERE id_region = $1 RETURNING *'
