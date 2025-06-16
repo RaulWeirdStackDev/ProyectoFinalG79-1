@@ -11,23 +11,23 @@ const Productos = () => {
   const { allproductos } = useContext(ProductosContext);
   const { addToCart } = useContext(CartContext);
 
-  const productosFiltrados = allproductos.filter(p =>
-    p.categoria && p.categoria.toLowerCase() === categoria.toLowerCase()
-  );
+  const productosFiltrados = allproductos
+    .filter(
+      (p) =>
+        p.categoria && p.categoria.toLowerCase() === categoria.toLowerCase()
+    )
+    .sort((a, b) =>
+      a.nombre.localeCompare(b.nombre, 'es', { sensitivity: 'base' })
+    );
 
   return (
     <div>
       <div className="iconos-wrapper-productos">
         <Iconos />
       </div>
-
-      <h2 className="text-center my-4">Productos en categoría: {categoria}</h2>
-
       {productosFiltrados.length ? (
         <div
-          className="productos-list"
-          style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}
-        >
+          className="productos-list">
           {productosFiltrados.map(producto => (
             <CardItem
               key={producto.id_producto}

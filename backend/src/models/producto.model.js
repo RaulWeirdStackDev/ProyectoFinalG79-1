@@ -10,7 +10,8 @@ export const createProductoModel = async (productoData) => {
     descuento = 0,
     img,
     estado = 1,
-    // Campos opcionales para MTG
+    stock = 0,
+    // Campos opcionales para single_mtg
     rareza,
     edicion,
     tipo,
@@ -37,6 +38,7 @@ export const createProductoModel = async (productoData) => {
       descuento,
       img,
       estado,
+      stock,
     ]
 
     const resultProducto = await client.query(sqlProducto, valuesProducto)
@@ -69,28 +71,41 @@ export const createProductoModel = async (productoData) => {
 
 export const readAllProductosModel = async () => {
   const sqlQuery = `
-    SELECT p.*, c.descripcion AS categoria
+    SELECT  p.*,
+            c.descripcion AS categoria,
+            pm.rareza,
+            pm.edicion,
+            pm.tipo   AS tipo_carta,
+            pm.color,
+            pm.foil
     FROM producto p
-    JOIN categoria c ON p.id_categoria = c.id_categoria
-  `
-  const response = await pool.query(sqlQuery)
-  return response.rows
-}
+    JOIN categoria c      ON p.id_categoria = c.id_categoria
+    LEFT JOIN producto_mtg pm ON p.id_producto = pm.id_producto;
+  `;
+  const { rows } = await pool.query(sqlQuery);
+  return rows;
+};
 
 export const readProductosPorCategoriaModel = async (categoriaDescripcion) => {
   const sqlQuery = `
-    SELECT p.*, c.descripcion AS categoria
+    SELECT  p.*,
+            c.descripcion AS categoria,
+            pm.rareza,
+            pm.edicion,
+            pm.tipo   AS tipo_carta,
+            pm.color,
+            pm.foil
     FROM producto p
-    JOIN categoria c ON p.id_categoria = c.id_categoria
-    WHERE c.descripcion = $1 AND p.estado = '1'
-  `
-  const values = [categoriaDescripcion]
-  const response = await pool.query(sqlQuery, values)
-  return response.rows
-}
+    JOIN categoria c      ON p.id_categoria = c.id_categoria
+    LEFT JOIN producto_mtg pm ON p.id_producto = pm.id_producto
+    WHERE c.descripcion = $1
+      AND p.estado = '1';
+  `;
+  const { rows } = await pool.query(sqlQuery, [categoriaDescripcion]);
+  return rows;
+};
 
 export const updateProductoModel = async (id, datos) => {
-  // Para simplificar, actualizamos solo campos básicos, puedes adaptar luego
   const {
     id_categoria,
     nombre,
@@ -100,6 +115,7 @@ export const updateProductoModel = async (id, datos) => {
     descuento,
     img,
     estado,
+    stock,
   } = datos
 
   const sqlQuery = `
@@ -112,6 +128,7 @@ export const updateProductoModel = async (id, datos) => {
         descuento = $7,
         img = $8,
         estado = $9
+        stock= $10
     WHERE id_producto = $1
     RETURNING *
   `
@@ -125,6 +142,7 @@ export const updateProductoModel = async (id, datos) => {
     descuento,
     img,
     estado,
+    stock,
   ]
 
   const response = await pool.query(sqlQuery, values)
