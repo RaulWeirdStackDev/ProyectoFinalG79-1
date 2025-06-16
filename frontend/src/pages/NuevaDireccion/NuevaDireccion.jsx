@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import { UserContext } from "../../context/UserContext";
 import {
@@ -11,6 +11,11 @@ import {
 const NuevaDireccion = () => {
   const { userData, token } = useContext(UserContext);
   const navigate = useNavigate();
+
+const { state } = useLocation();
+const fromCheckout = state?.fromCheckout || false;
+const cart = state?.cart || null;
+const tipoEntrega = state?.tipoEntrega || null;
 
   const [regiones, setRegiones] = useState([]);
   const [comunas, setComunas] = useState([]);
@@ -65,9 +70,16 @@ const NuevaDireccion = () => {
         },
         token
       );
-      Swal.fire("Éxito", "Dirección creada.", "success").then(() =>
-        navigate("/profile/address")
-      );
+      Swal.fire("Éxito", "Dirección creada.", "success").then(() => {
+  if (fromCheckout && cart && tipoEntrega) {
+    navigate("/profile/address", {
+      state: { fromCheckout, cart, tipoEntrega },
+    });
+  } else {
+    navigate("/profile/address");
+  }
+});
+
     } catch (err) {
       Swal.fire("Error", err.message, "error");
     }
