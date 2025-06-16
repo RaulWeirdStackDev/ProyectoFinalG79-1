@@ -22,12 +22,12 @@ const EditProfile = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Fetch URL:', `http://localhost:3000/api/user/${userData.id}`);
+        console.log('Fetch URL:', `https://proyectofinalg79-1.onrender.com/api/user/${userData.id}`);
         console.log('userData completo:', userData);
 console.log('Datos enviados:', formData);
 
         try {
-            const res = await fetch(`http://localhost:3000/api/user/${userData.id}`, {
+            const res = await fetch(`https://proyectofinalg79-1.onrender.com/api/user/${userData.id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",

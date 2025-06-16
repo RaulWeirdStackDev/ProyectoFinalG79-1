@@ -58,7 +58,7 @@ const CrearProducto = () => {
         estado: form.estado,
       }
 
-      const res = await fetch("http://localhost:3000/api/producto", {
+      const res = await fetch("https://proyectofinalg79-1.onrender.com/api/producto", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
