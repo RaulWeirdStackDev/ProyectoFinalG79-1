@@ -25,7 +25,7 @@ const UserProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await fetch('http://localhost:3000/api/auth/login', {
+      const response = await fetch('https://proyectofinalg79-1.onrender.com/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email.toLowerCase(), password }),
@@ -40,7 +40,7 @@ const UserProvider = ({ children }) => {
       setToken(data.token);
       localStorage.setItem('token', data.token);
 
-      const profileRes = await fetch('http://localhost:3000/api/auth/me', {
+      const profileRes = await fetch('https://proyectofinalg79-1.onrender.com/api/auth/me', {
         headers: { Authorization: `Bearer ${data.token}` },
       });
 
@@ -71,7 +71,7 @@ const UserProvider = ({ children }) => {
       const formattedApellido = capitalize(apellido);
       const formattedEmail = email.toLowerCase();
 
-      const response = await fetch('http://localhost:3000/api/auth/register', {
+      const response = await fetch('https://proyectofinalg79-1.onrender.com/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -125,7 +125,7 @@ const UserProvider = ({ children }) => {
     if (token && !userData) {
       const fetchUserProfile = async () => {
         try {
-          const res = await fetch('http://localhost:3000/api/auth/me', {
+          const res = await fetch('https://proyectofinalg79-1.onrender.com/api/auth/me', {
             headers: { Authorization: `Bearer ${token}` },
           });
           if (!res.ok) throw new Error('No se pudo obtener perfil');

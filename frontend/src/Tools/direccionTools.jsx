@@ -1,4 +1,4 @@
-const API = "http://localhost:3000/api";
+const API = "https://proyectofinalg79-1.onrender.com/api";
 
 export const fetchRegiones = async (token) => {
   const res = await fetch(`${API}/region`, {

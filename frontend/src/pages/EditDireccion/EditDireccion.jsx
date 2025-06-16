@@ -29,7 +29,7 @@ const EditDireccion = () => {
   useEffect(() => {
     const cargarDatos = async () => {
       try {
-        const resDir = await fetch(`http://localhost:3000/api/direccion/${id}`, {
+        const resDir = await fetch(`https://proyectofinalg79-1.onrender.com/api/direccion/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!resDir.ok) throw new Error("No se pudo cargar la dirección");

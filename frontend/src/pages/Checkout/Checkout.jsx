@@ -72,7 +72,7 @@ const Checkout = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:3000/api/checkouts", {
+      const response = await fetch("https://proyectofinalg79-1.onrender.com/api/checkouts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

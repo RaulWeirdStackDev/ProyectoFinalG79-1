@@ -27,7 +27,7 @@ useEffect(() => {
 
   const handleUpdate = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/api/producto/${productoSeleccionado.id_producto}`, {
+      const res = await fetch(`https://proyectofinalg79-1.onrender.com/api/producto/${productoSeleccionado.id_producto}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ useEffect(() => {
     if (!confirmar) return;
 
     try {
-      const res = await fetch(`http://localhost:3000/api/productos/${id}`, {
+      const res = await fetch(`https://proyectofinalg79-1.onrender.com/api/productos/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });

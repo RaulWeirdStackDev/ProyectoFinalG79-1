@@ -13,7 +13,7 @@ const ProductosProvider = ({ children }) => {
 
   const fetchProductos = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/productos")
+      const res = await fetch("https://proyectofinalg79-1.onrender.com/api/productos")
       const data = await res.json()
       console.log("Productos recibidos:", data)
       setProductos(data)
@@ -24,7 +24,7 @@ const ProductosProvider = ({ children }) => {
 
   const fetchCategorias = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/categorias", {
+      const res = await fetch("https://proyectofinalg79-1.onrender.com/api/categorias", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
