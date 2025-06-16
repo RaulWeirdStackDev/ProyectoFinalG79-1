@@ -15,7 +15,6 @@ import inventarioRoutes from './routes/inventario.routes.js'
 import ventaRoutes from './routes/venta.routes.js'
 
 import { log } from './middleware/log.middleware.js'
-import pool from './db/config.js'; 
 
 
 const PORT = process.env.PORT || 3000
@@ -40,8 +39,6 @@ app.use('/api', ventaRoutes)
 // console.log('Tipo:', typeof process.env.DB_PASSWORD, 'Valor:', process.env.DB_PASSWORD)
 
 app.listen(PORT, console.log(`🍒 Server http://localhost:${PORT}`))
-pool.connect()
-    .then(() => console.log("✅ Conectado correctamente"))
-    .catch(err => console.error("❌ Error conectando a DB:", err));
+
 
 export default app
