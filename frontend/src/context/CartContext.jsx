@@ -1,40 +1,48 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import {
-    addOrUpdateProduct,
-    updateProductQuantity,
-    calculateTotal,
-    removeProduct,
+  addOrUpdateProduct,
+  updateProductQuantity,
+  calculateTotal,
+  removeProduct,
 } from "../Tools/cartTools";
 
 export const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
-    const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const savedCart = sessionStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
 
-    const addToCart = (product) => {
-        setCart((prevCart) => addOrUpdateProduct(prevCart, product));
-    };
+  useEffect(() => {
+    sessionStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
-    const updateQuantity = (productId, amount) => {
-        setCart((prevCart) => updateProductQuantity(prevCart, productId, amount));
-    };
+  const addToCart = (product) => {
+    setCart((prevCart) => addOrUpdateProduct(prevCart, product));
+  };
 
-    const clearCart = () => {
-        setCart([]); 
-    };
+  const updateQuantity = (productId, amount) => {
+    setCart((prevCart) => updateProductQuantity(prevCart, productId, amount));
+  };
 
-    const total = calculateTotal(cart);
+  const clearCart = () => {
+    setCart([]);
+  };
 
-    const removeFromCart = (productId) => {
-        setCart((prevCart) => removeProduct(prevCart, productId));
-    };
+  const removeFromCart = (productId) => {
+    setCart((prevCart) => removeProduct(prevCart, productId));
+  };
 
-    return (
-        <CartContext.Provider
-            value={{ cart, addToCart, updateQuantity, clearCart, total, removeFromCart }}>
-            {children}
-        </CartContext.Provider>
-    );
+  const total = calculateTotal(cart);
+
+  return (
+    <CartContext.Provider
+      value={{ cart, addToCart, updateQuantity, clearCart, total, removeFromCart }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
 };
 
 export default CartProvider;

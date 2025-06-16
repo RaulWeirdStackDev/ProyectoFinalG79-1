@@ -16,6 +16,7 @@ import EditProducto from './pages/EditProducto/EditProducto';
 import MisDirecciones from "./pages/MisDirecciones/MisDirecciones";
 import NuevaDireccion from "./pages/NuevaDireccion/NuevaDireccion";
 import EditDireccion from "./pages/EditDireccion/EditDireccion";
+import Checkout from './pages/Checkout/Checkout';
 import NotFound from './pages/NotFound/NotFound';
 import Footer from './pages/Footer/Footer';
 import ProductosProvider from './context/ProductosContext';
@@ -110,7 +111,14 @@ const App = () => {
                               : <Navigate to="/login" replace />
                           }
                         />
-
+                        <Route
+                          path="/checkout"
+                          element={
+                            token
+                              ? <Checkout />
+                              : <Navigate to="/login" replace />
+                          }
+                        />
                         <Route
                           path="/register"
                           element={token ? <Navigate to="/" replace /> : <RegisterPage />}

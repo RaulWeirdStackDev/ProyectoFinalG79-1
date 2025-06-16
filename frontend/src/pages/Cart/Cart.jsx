@@ -1,4 +1,5 @@
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../../context/CartContext';
 import { UserContext } from '../../context/UserContext';
 import Swal from 'sweetalert2';
@@ -8,31 +9,29 @@ import './Cart.css';
 const Cart = () => {
   const { cart, updateQuantity, total, removeFromCart, clearCart } = useContext(CartContext);
   const { token } = useContext(UserContext);
+  const [tipoEntrega, setTipoEntrega] = useState('');
+  const navigate = useNavigate();
 
-  const handleCheckout = async () => {
+  const handleCheckout = () => {
     if (!token) {
       Swal.fire('Error', 'Debes iniciar sesión para realizar la compra.', 'error');
       return;
     }
 
-    try {
-      const response = await fetch('http://localhost:3000/api/checkouts', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ cart }),
-      });
-
-      if (!response.ok) throw new Error('Error en el proceso de compra.');
-
-      Swal.fire('Éxito', 'Compra realizada con éxito. 🎉', 'success');
-      clearCart();
-    } catch (error) {
-      console.error('Error en el checkout:', error.message);
-      Swal.fire('Error', 'Hubo un problema al procesar la compra.', 'error');
+    if (!tipoEntrega) {
+      Swal.fire('Atención', 'Debes seleccionar un tipo de entrega.', 'warning');
+      return;
     }
+
+    // GUARDAMOS EN SESSIONSTORAGE
+    sessionStorage.setItem('checkout_cart', JSON.stringify(cart));
+    sessionStorage.setItem('checkout_tipoEntrega', tipoEntrega);
+
+    navigate('/checkout', { state: { cart, tipoEntrega } });
+
+
+    // Aquí se redirige a Checkout enviando datos
+    navigate('/checkout', { state: { cart, tipoEntrega } });
   };
 
   const confirmRemove = (id_producto) => {
@@ -100,9 +99,46 @@ const Cart = () => {
           ))
         )}
       </div>
+
+      <div className="mt-4">
+        <h5>Tipo de entrega</h5>
+
+        <div className="form-check">
+          <input
+            className="form-check-input"
+            type="radio"
+            name="tipoEntrega"
+            id="retiro"
+            value="retiro"
+            onChange={(e) => setTipoEntrega(e.target.value)}
+          />
+          <label className="form-check-label" htmlFor="retiro">
+            Retiro en tienda
+          </label>
+        </div>
+
+        <div className="form-check">
+          <input
+            className="form-check-input"
+            type="radio"
+            name="tipoEntrega"
+            id="envio"
+            value="envio"
+            onChange={(e) => setTipoEntrega(e.target.value)}
+          />
+          <label className="form-check-label" htmlFor="envio">
+            Envío por cobrar
+          </label>
+        </div>
+      </div>
+
       <div className="text-center mt-1">
         <h3>Total: ${total.toLocaleString()}</h3>
-        <button className="btn btn-success mt-2 mb-2" disabled={!token} onClick={handleCheckout}>
+        <button
+          className="btn btn-success mt-3 mb-2"
+          disabled={!token}
+          onClick={handleCheckout}
+        >
           {token ? 'Pagar' : 'Inicia sesión para pagar'}
         </button>
       </div>
