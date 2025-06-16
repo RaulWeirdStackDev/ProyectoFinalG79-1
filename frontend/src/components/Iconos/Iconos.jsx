@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Iconos.css';
 import singleMtgImg from '../../assets/images/SINGLESBLACK.png';
 import accesoriosImg from '../../assets/images/ACCTCGBLACK.png';
@@ -18,14 +18,22 @@ const categorias = [
 
 const Iconos = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  return (
+return (
     <div className="iconos-container">
-      {categorias.map(({ label, path, img }, index) => (
-        <div key={index} className="icono" onClick={() => navigate(path)}>
-          <img src={img} alt={label} />
-        </div>
-      ))}
+      {categorias.map(({ label, path, img }, index) => {
+        const isActive = location.pathname === path;  
+        return (
+          <div
+            key={index}
+            className={`icono ${isActive ? 'activo' : ''}`}
+            onClick={() => navigate(path)}
+          >
+            <img src={img} alt={label} />
+          </div>
+        );
+      })}
     </div>
   );
 };
