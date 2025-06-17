@@ -1,14 +1,14 @@
 .iconos-container {
   display: grid;
   grid-template-columns: repeat(6, minmax(90px, 1fr)); 
-  gap: 2rem;
-  margin-top: 2rem;
+  gap: 1rem;
+  margin-top: 1rem;
   justify-items: center;   
   transform: scale(1.1);
 }
 
 .icono {
-  width: 90px;  
+  width: clamp(90px, 15vw, 120px);
   cursor: pointer;
   transition: transform 0.3s ease;
 }
@@ -37,13 +37,11 @@
   transform: scale(0.95);
 }
 
-
 @media (max-width: 899px) {
   .iconos-container {
     grid-template-columns: repeat(3, minmax(90px, 1fr)); 
   }
 }
-
 
 @media (max-width: 599px) {
   .iconos-container {
