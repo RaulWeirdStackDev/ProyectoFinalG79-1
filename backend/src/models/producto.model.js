@@ -86,6 +86,25 @@ export const readAllProductosModel = async () => {
   return rows;
 };
 
+export const readProductByIdModel = async (id) => {
+  const sqlQuery = `
+    SELECT  p.*,
+            c.descripcion AS categoria,
+            pm.rareza,
+            pm.edicion,
+            pm.tipo   AS tipo_carta,
+            pm.color,
+            pm.foil
+    FROM producto p
+    JOIN categoria c ON p.id_categoria = c.id_categoria
+    LEFT JOIN producto_mtg pm ON p.id_producto = pm.id_producto
+    WHERE p.id_producto = $1;`;
+  const values = [id]
+  const { rows } = await pool.query(sqlQuery, values);
+  return rows;
+};
+
+
 export const readProductosPorCategoriaModel = async (categoriaDescripcion) => {
   const sqlQuery = `
     SELECT  p.*,
