@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import  { useState, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { validateCredentials } from '../../Tools/loginRegisterTools';
 import { UserContext } from '../../context/UserContext';
@@ -53,7 +53,7 @@ const RegisterPage = () => {
             />
           </div>
           <div className="mb-3">
-            <label>RUT:</label>
+            <label>RUT (sin puntos y con guion):</label>
             <input
               type="text"
               value={rut}
