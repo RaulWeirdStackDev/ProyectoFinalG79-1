@@ -1,6 +1,7 @@
 import {
   createProductoModel,
   readAllProductosModel,
+  readProductByIdModel,
   readProductosPorCategoriaModel,
   updateProductoModel,
 } from "../models/producto.model.js"
@@ -23,6 +24,17 @@ export const readAllProductos = async (req, res) => {
     res.status(200).json(data)  // acá no lo envuelvo en objeto para facilitar front
   } catch (error) {
     console.error('ERROR_CONTROLLER_GET_PRODUCTOS =>', error)
+    res.status(500).json({ error: "Error al obtener productos" })
+  }
+}
+
+export const readProductById = async (req, res) => {
+  try {
+    const { id } = req.params
+    const data = await readProductByIdModel(id)
+    res.status(200).json(data)  // acá no lo envuelvo en objeto para facilitar front
+  } catch (error) {
+    console.error('ERROR_CONTROLLER_GET_PRODUCT_BY_ID =>', error)
     res.status(500).json({ error: "Error al obtener productos" })
   }
 }
