@@ -13,8 +13,8 @@ export const createUserFav = async (req, res) => {
 
 export const readUserFav = async (req, res) => {
     try {
-        const { id_usuario } = req.params
-        const data = await readUserFavModel(id_usuario)
+        const { id } = req.params
+        const data = await readUserFavModel(id)
         res.status(200).json({ data })
     } catch (error) {
         res.status(500).json({ error: 'Error al procesar la solicitud' })
