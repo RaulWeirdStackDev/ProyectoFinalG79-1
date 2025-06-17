@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import './CardItem.css';
 import { useContext } from 'react';
 import { FavoritesContext } from '../../context/FavoritesContext';
+import Swal from "sweetalert2";
+
 
 const CardItem = ({ producto, addToCart, hideVerMas }) => {
   const { id_producto,
@@ -15,8 +17,24 @@ const CardItem = ({ producto, addToCart, hideVerMas }) => {
     stock
   } = producto;
 
-  const { toggleFavorite, isFavorite } = useContext(FavoritesContext);
+  const { isFavorite, agregarFavorito, quitarFavorito } = useContext(FavoritesContext);
   const favorito = isFavorite(id_producto);
+
+  const handleAgregarFavorito = async () => {
+    await agregarFavorito(producto);
+    Swal.fire({
+      text: 'Agregado a favoritos correctamente',
+      icon: 'success'
+    })
+  }
+
+  const handleQuitarFavorito = async () => {
+    await quitarFavorito(producto);
+    Swal.fire({
+      text: 'Eliminado de favoritos correctamente',
+      icon: 'success'
+    })
+  }
 
   const esSingle = categoria === 'single_mtg';
   const esFoil = esSingle && (foil === true || foil === 'true' || foil === 1);
@@ -50,7 +68,7 @@ const CardItem = ({ producto, addToCart, hideVerMas }) => {
         )}
         <button
           className="btn btn-sm"
-          onClick={() => toggleFavorite(producto)}
+          onClick={() => favorito ? handleQuitarFavorito() : handleAgregarFavorito()}
           title={favorito ? "Quitar de favoritos" : "Agregar a favoritos"}
         >
           {favorito ? "❤️" : "🖤"}

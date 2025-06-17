@@ -2,9 +2,7 @@ import { createContext, useState, useEffect } from "react"
 import { useContext } from "react"
 import { UserContext } from "./UserContext"
 
-
 export const ProductosContext = createContext()
-
 
 const ProductosProvider = ({ children }) => {
   const [allproductos, setProductos] = useState([])
@@ -22,6 +20,20 @@ const ProductosProvider = ({ children }) => {
     }
   }
 
+  const fetchProductoById = async (id) => {
+    try {
+      const res = await fetch(`https://proyectofinalg79-1.onrender.com/api/producto/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      const data = await res.json()
+      return data[0]
+    } catch (error) {
+      console.error("Error al cargar productos:", error)
+    }
+  }
+
   const fetchCategorias = async () => {
     try {
       const res = await fetch("https://proyectofinalg79-1.onrender.com/api/categorias", {
@@ -30,7 +42,6 @@ const ProductosProvider = ({ children }) => {
         },
       })
       const data = await res.json()
-      console.log("Categorías recibidas:", data.data)
       setCategorias(data.data)
     } catch (error) {
       console.error("Error al cargar categorías:", error)
@@ -46,6 +57,7 @@ const ProductosProvider = ({ children }) => {
     <ProductosContext.Provider
       value={{
         allproductos,
+        fetchProductoById,
         categorias,
         refreshProductos: fetchProductos, // ✅ ya está definida fuera del useEffect
       }}

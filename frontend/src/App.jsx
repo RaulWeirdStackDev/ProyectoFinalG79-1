@@ -27,8 +27,8 @@ import FavoritesProvider from './context/FavoritesContext';
 const App = () => {
   return (
     <UserProvider>
-      <FavoritesProvider>
         <ProductosProvider>
+      <FavoritesProvider>
           <CartProvider>
             <BrowserRouter>
               <div className="min-vh-100 d-flex flex-column">
@@ -140,8 +140,8 @@ const App = () => {
               </div>
             </BrowserRouter>
           </CartProvider>
-        </ProductosProvider>
       </FavoritesProvider>
+        </ProductosProvider>
     </UserProvider>
   );
 };
