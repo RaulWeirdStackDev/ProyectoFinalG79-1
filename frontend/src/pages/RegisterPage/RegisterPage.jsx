@@ -10,6 +10,9 @@ const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [rut, setRut] = useState('');
+  const [telefono, setTelefono] = useState('');
+
   const { register } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -17,9 +20,9 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateCredentials(email, password, confirmPassword)) {
-      const success = await register(nombre, apellido, email, password);
+      const success = await register(nombre, apellido, email, password, rut, telefono);
       if (success) {
-        navigate('/login'); // Redirige tras éxito del register...
+        navigate('/login'); 
       }
     }
   };
@@ -45,6 +48,26 @@ const RegisterPage = () => {
               type="text"
               value={apellido}
               onChange={(e) => setApellido(e.target.value)}
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label>RUT:</label>
+            <input
+              type="text"
+              value={rut}
+              onChange={(e) => setRut(e.target.value)}
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label>Teléfono:</label>
+            <input
+              type="tel"
+              value={telefono}
+              onChange={(e) => setTelefono(e.target.value)}
               className="form-control"
               required
             />

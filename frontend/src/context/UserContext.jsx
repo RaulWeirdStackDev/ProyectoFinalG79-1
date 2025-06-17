@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
- 
+
   const [token, setToken] = useState(() => localStorage.getItem('token'));
 
 
@@ -62,7 +62,7 @@ const UserProvider = ({ children }) => {
     }
   };
 
-  const register = async (nombre, apellido, email, password) => {
+  const register = async (nombre, apellido, email, password, rut, telefono) => {
     const capitalize = (str) =>
       str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
 
@@ -79,8 +79,11 @@ const UserProvider = ({ children }) => {
           apellido: formattedApellido,
           email: formattedEmail,
           password,
+          rut,
+          telefono,
         }),
       });
+
 
       const data = await response.json();
 

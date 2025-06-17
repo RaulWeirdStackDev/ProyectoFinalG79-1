@@ -3,14 +3,20 @@ import { createUserModel, findUserByIdModel, updateUserModel } from "../models/u
 
 export const createUser = async (req, res) => {
     try {
-        const { nombre, apellido, email, password } = req.body
-        const result = await createUserModel(nombre, apellido, email, password)
-        res.status(200).json({ user: result })
+        const { nombre, apellido, email, password, rut, telefono } = req.body;
+
+        if (!nombre || !apellido || !email || !password) {
+            return res.status(400).json({ error: 'Faltan campos obligatorios' });
+        }
+
+        const result = await createUserModel(nombre, apellido, email, password, rut, telefono);
+        res.status(200).json({ user: result });
     } catch (error) {
-        res.status(500).json({ error: 'Error al procesar la solicitud' })
-        console.error('ERROR_CONTROLLER_CREATE =>', error)
+        res.status(500).json({ error: 'Error al procesar la solicitud' });
+        console.error('ERROR_CONTROLLER_CREATE =>', error);
     }
-}
+};
+
 
 export const getUserById = async (req, res) => {
     try {
