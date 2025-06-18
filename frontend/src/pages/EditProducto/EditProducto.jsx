@@ -7,10 +7,14 @@ import Swal from 'sweetalert2';
 
 const EditProducto = () => {
   const { userData, token } = useContext(UserContext);
-  const { allproductos, refreshProductos } = useContext(ProductosContext);
+  const { allproductos, categorias, refreshProductos } = useContext(ProductosContext);
   const navigate = useNavigate();
-
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('');
+
+  const productosFiltrados = categoriaSeleccionada
+    ? allproductos.filter((p) => p.id_categoria === parseInt(categoriaSeleccionada))
+    : allproductos;
 
   useEffect(() => {
     if (!userData || userData.rol?.id_rol !== 1) {
@@ -82,7 +86,23 @@ const EditProducto = () => {
 
   return (
     <div className="container mt-4">
-      <h2 className="mb-4">Panel de Administración de Productos</h2>
+      <div className="d-flex justify-content-between align-items-center flex-wrap mb-4">
+        <h2 className="mb-3 mb-md-0">Panel de Administración de Productos:</h2>
+        <div className="col-md-4 mt-2">
+          <select
+            className="form-select mx-auto d-block"
+            value={categoriaSeleccionada}
+            onChange={(e) => setCategoriaSeleccionada(e.target.value)}
+          >
+            <option value="">Todas las categorías</option>
+            {categorias.map((cat) => (
+              <option key={cat.id_categoria} value={cat.id_categoria}>
+                {cat.descripcion}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
 
       {productoSeleccionado ? (
         <div className="card p-4 shadow-lg">
@@ -244,7 +264,7 @@ const EditProducto = () => {
         </div>
       ) : (
         <div className="row mt-4">
-          {allproductos.map((p) => (
+          {productosFiltrados.map((p) => (
             <div className="col-md-4 mb-3" key={p.id_producto}>
               <AdminCardProducto
                 producto={p}
