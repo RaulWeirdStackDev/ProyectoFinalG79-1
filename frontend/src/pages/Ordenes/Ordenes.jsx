@@ -1,181 +1,150 @@
 import { useState, useEffect, useContext } from 'react';
-import { Container, Table, Accordion, Alert, Spinner } from 'react-bootstrap';
+import { Button, Table, Modal } from 'react-bootstrap';
 import { UserContext } from '../../context/UserContext';
+import { ProductosContext } from '../../context/ProductosContext';
+import './Ordenes.css';
 
 export const Ordenes = () => {
   const { token } = useContext(UserContext);
+  const { allproductos } = useContext(ProductosContext);
+
   const [ordenes, setOrdenes] = useState([]);
-  // const [detalles, setDetalles] = useState({});
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(null);
+  const [detalles, setDetalles] = useState({});
+  const [ventaSeleccionada, setVentaSeleccionada] = useState(null);
+  const [mostrarModal, setMostrarModal] = useState(false);
 
-  const getOrdenByUser = async () => {
-    try {
-      const user = localStorage.getItem("user");
-      const { id } = JSON.parse(user);
+  const toggleDetalles = async (id_venta) => {
+    if (!detalles[id_venta]) {
+      try {
+        const res = await fetch(
+          `https://proyectofinalg79-1.onrender.com/api/ventas/detalle/${id_venta}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        const { data } = await res.json();
 
-      const res = await fetch(`https://proyectofinalg79-1.onrender.com/api/ventas/usuario/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      const data = await res.json()
+        const datosConNombre = data.map(det => {
+          const p = allproductos.find(prod => prod.id_producto === det.id_producto);
+          return {
+            ...det,
+            nombre: p?.nombre || `Producto ${det.id_producto}`
+          };
+        });
 
-      setOrdenes(data.data)
-
-      console.log(data.data)
-      // await setFavorites(data.data)
-      // const arrayFavoritos = await Promise.all(
-      //   data.data.map((favorito) => fetchProductoById(favorito.id_producto))
-      // );
-      // await setFavoritesArray(arrayFavoritos)
-    } catch (error) {
-      console.error("Error al cargar los favoritos:", error)
+        setDetalles(prev => ({ ...prev, [id_venta]: datosConNombre }));
+      } catch (err) {
+        console.error('Error al cargar detalles:', err);
+        return;
+      }
     }
-  }
-
+    setVentaSeleccionada(id_venta);
+    setMostrarModal(true);
+  };
 
   useEffect(() => {
-    // const fetchOrdenes = async () => {
-    //   if (!userData || !userData.id) {
-    //     setError('Por favor, inicia sesión para ver tus órdenes.');
-    //     setLoading(false);
-    //     return;
-    //   }
-    //   try {
-    //     setLoading(true);
-    //     const response = await readVentaByUsuarioModel(userData.id, token);
-    //     setOrdenes(response);
-    //   } catch (err) {
-    //     setError('Error al cargar las órdenes. Intenta de nuevo más tarde.');
-    //     console.error(err);
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // };
-    // fetchOrdenes();
-    getOrdenByUser()
-  }, []);
-
-  // const fetchDetalles = async (idVenta) => {
-  //   if (detalles[idVenta]) return;
-  //   try {
-  //     const response = await readVentaByVentaModel(idVenta, token);
-  //     setDetalles((prev) => ({ ...prev, [idVenta]: response }));
-  //   } catch (err) {
-  //     setError('Error al cargar los detalles de la orden.');
-  //     console.error(err);
-  //   }
-  // };
-
-  // if (!userData || !userData.id) {
-  //   return (
-  //     <Container className="my-5">
-  //       <Alert variant="warning">Debes iniciar sesión para ver tus órdenes.</Alert>
-  //     </Container>
-  //   );
-  // }
-
-  // if (loading) {
-  //   return (
-  //     <Container className="text-center my-5">
-  //       <Spinner animation="border" role="status">
-  //         <span className="visually-hidden">Cargando...</span>
-  //       </Spinner>
-  //     </Container>
-  //   );
-  // }
-
-  // if (error) {
-  //   return (
-  //     <Container className="my-5">
-  //       <Alert variant="danger">{error}</Alert>
-  //     </Container>
-  //   );
-  // }
+    (async () => {
+      try {
+        const { id } = JSON.parse(localStorage.getItem('user') || '{}');
+        const res = await fetch(
+          `https://proyectofinalg79-1.onrender.com/api/ventas/usuario/${id}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        const { data } = await res.json();
+        setOrdenes(data);
+      } catch (err) {
+        console.error('Error al cargar las órdenes:', err);
+      }
+    })();
+  }, [token]);
 
   return (
-    // <Container className="my-5">
-    //   <h2>Mis Órdenes</h2>
-    //   {ordenes.length === 0 ? (
-    //     <Alert variant="info">No tienes órdenes registradas.</Alert>
-    //   ) : (
-    //     <Accordion defaultActiveKey="0">
-    //       {ordenes.map((orden) => (
-    //         <Accordion.Item eventKey={orden.id_venta.toString()} key={orden.id_venta}>
-    //           <Accordion.Header onClick={() => fetchDetalles(orden.id_venta)}>
-    //             Orden #{orden.id_venta} - {orden.descripcion || 'Sin descripción'} ({new Date(orden.fecha_registro).toLocaleDateString()})
-    //           </Accordion.Header>
-    //           <Accordion.Body>
-    //             {detalles[orden.id_venta] ? (
-    //               <Table striped bordered hover responsive>
-    //                 <thead>
-    //                   <tr>
-    //                     <th>ID Producto</th>
-    //                     <th>Cantidad</th>
-    //                     <th>Precio Unitario</th>
-    //                     <th>Descuento</th>
-    //                     <th>Precio Final</th>
-    //                   </tr>
-    //                 </thead>
-    //                 <tbody>
-    //                   {detalles[orden.id_venta].map((detalle) => (
-    //                     <tr key={detalle.id_venta_detalle}>
-    //                       <td>{detalle.id_producto}</td>
-    //                       <td>{detalle.cantidad}</td>
-    //                       <td>${detalle.precio_venta.toLocaleString()}</td>
-    //                       <td>${detalle.descuento.toLocaleString()}</td>
-    //                       <td>${detalle.precio_final.toLocaleString()}</td>
-    //                     </tr>
-    //                   ))}
-    //                 </tbody>
-    //               </Table>
-    //             ) : (
-    //               <div className="text-center">
-    //                 <Spinner animation="border" size="sm" /> Cargando detalles...
-    //               </div>
-    //             )}
-    //           </Accordion.Body>
-    //         </Accordion.Item>
-    //       ))}
-    //     </Accordion>
-    //   )}
-    // </Container>
-    <>
-      <div className="container mt-3 mx-auto container-custom">
-        <h2 className="text-center mb-4">Detalles del Pedido:</h2>
-        <div className="row justify-content-center">
-          {ordenes.length === 0 ? (
-            <p className="text-center">El carrito está vacío.</p>
-          ) : (
-            <Table className="table table-striped table-responsive">
+    <div className="ordenes-wrapper mt-4">
+      <h2 className="text-center mb-4">Detalles del pedido</h2>
+
+      {ordenes.length === 0 ? (
+        <p className="text-center">No hay pedidos para mostrar.</p>
+      ) : (
+        <table className="table ordenes-table">
+          <thead>
+            <tr>
+              <th># Orden</th>
+              <th>Fecha compra:</th>
+              <th>Tipo entrega:</th>
+              <th>Dirección:</th>
+              <th>Total:</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {ordenes.map(o => (
+              <tr key={o.id_venta}>
+                <td data-label="# Orden">{o.id_venta}</td>
+                <td>{o.fecha_venta}</td>
+                <td>{o.tipo_entrega}</td>
+                <td className="text-truncate direccion-col" title={o.direccion_envio}>
+                  {o.direccion_envio}
+                </td>
+                <td data-label="Total:">
+                  {(Number(o.total_venta) || 0).toLocaleString('es-CL')}</td>
+
+                <td>
+                  <Button
+                    size="sm"
+                    variant="primary"
+                    className="detalle-btn"
+                    onClick={() => toggleDetalles(o.id_venta)}
+                  >
+                    Ver detalles
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+
+      {/* Modal de detalles */}
+      <Modal
+        show={mostrarModal}
+        onHide={() => setMostrarModal(false)}
+        size="lg"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>
+            Detalles Orden#{ventaSeleccionada}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {ventaSeleccionada && detalles[ventaSeleccionada] ? (
+            <Table striped bordered size="sm">
               <thead>
                 <tr>
-                  <th scope="col"># Venta</th>
-                  <th scope="col">Fecha Compra</th>
-                  <th scope="col">Tipo Entrega</th>
-                  <th scope="col">Dirección</th>
-                  <th scope="col">Total Venta</th>
+                  <th>Producto</th>
+                  <th>Qty.</th>
+                  <th>Precio</th>
+                  <th>Dcto.</th>
+                  <th>Precio Final</th>
                 </tr>
               </thead>
               <tbody>
-                {ordenes.map((item) => (
-                  <tr key={item.id_venta}>
-                    <td scope="row">{item.id_venta}</td>
-                    <td>{item.fecha_venta}</td>
-                    <td>{item.tipo_entrega}</td>
-                    <td>{item.direccion_envio}</td>
-                    <td>{item.total_venta.toLocaleString()}</td>
+                {detalles[ventaSeleccionada].map(det => (
+                  <tr key={det.id_venta_detalle}>
+                    <td>{det.nombre}</td>
+                    <td>{det.cantidad}</td>
+                    <td>{(Number(det.precio_venta) || 0).toLocaleString('es-CL')}</td>
+                    <td>{det.descuento.toLocaleString()}</td>
+                    <td>{(Number(det.precio_final) || 0).toLocaleString('es-CL')}</td>
                   </tr>
                 ))}
               </tbody>
             </Table>
+          ) : (
+            <p>Cargando detalles...</p>
           )}
-        </div>
-      </div>
-    </>
+        </Modal.Body>
+      </Modal>
+    </div>
   );
 };
 
 export default Ordenes;
-
