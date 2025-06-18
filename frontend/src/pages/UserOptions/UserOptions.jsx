@@ -10,7 +10,7 @@ const UserOptions = () => {
             Iniciar Sesión 🔐
           </Link>
           <Link to="/register" className="btn btn-dark mb-2">
-            Registrarse 🪪
+            <a class="btn btn-dark mb-2" href="/register">Registrarse 📖</a>
           </Link>
         </div>
       </div>
