@@ -28,8 +28,8 @@ import Ordenes from './pages/Ordenes/Ordenes';
 const App = () => {
   return (
     <UserProvider>
-        <ProductosProvider>
-      <FavoritesProvider>
+      <ProductosProvider>
+        <FavoritesProvider>
           <CartProvider>
             <BrowserRouter>
               <div className="min-vh-100 d-flex flex-column">
@@ -38,12 +38,11 @@ const App = () => {
                   <UserContext.Consumer>
                     {({ token, userData }) => (
                       <Routes>
+                        
                         <Route path="/" element={<Home />} />
                         <Route path="/cart" element={<Cart />} />
                         <Route path="/itemdetails/:itemId" element={<ItemDetails />} />
                         <Route path="/productos/:categoria" element={<Productos />} />
-                        <Route path="/ordenes" element={<Ordenes />} />
-
 
                         <Route
                           path="/login"
@@ -59,6 +58,7 @@ const App = () => {
                             )
                           }
                         />
+
                         <Route
                           path="/profile"
                           element={
@@ -67,6 +67,7 @@ const App = () => {
                               : <Navigate to="/login" replace />
                           }
                         />
+
                         <Route
                           path="/profileadmin"
                           element={
@@ -75,6 +76,7 @@ const App = () => {
                               : <Navigate to="/login" replace />
                           }
                         />
+
                         <Route
                           path="/crear-producto"
                           element={
@@ -83,6 +85,7 @@ const App = () => {
                               : <Navigate to="/login" replace />
                           }
                         />
+
                         <Route
                           path="/editproductos"
                           element={
@@ -91,8 +94,13 @@ const App = () => {
                               : <Navigate to="/login" replace />
                           }
                         />
-                        <Route path="/profile/edit" element={token ? <EditProfile /> :
-                          <Navigate to="/login" />} />
+
+                        <Route path="/profile/edit" element={
+                          token
+                            ? <EditProfile />
+                            :
+                            <Navigate to="/login" />
+                        } />
 
                         <Route
                           path="/profile/address"
@@ -102,10 +110,16 @@ const App = () => {
                               : <Navigate to="/login" replace />
                           }
                         />
+
                         <Route
                           path="/profile/address/new"
-                          element={token ? <NuevaDireccion /> : <Navigate to="/login" replace />}
+                          element={token
+                            ?
+                            <NuevaDireccion />
+                            : <Navigate to="/login" replace />
+                          }
                         />
+
                         <Route
                           path="/profile/address/:id/edit"
                           element={
@@ -114,6 +128,16 @@ const App = () => {
                               : <Navigate to="/login" replace />
                           }
                         />
+
+                        <Route
+                          path="/ordenes"
+                          element={
+                            token
+                              ? <Ordenes />
+                              : <Navigate to="/login" replace />
+                          }
+                        />
+
                         <Route
                           path="/checkout"
                           element={
@@ -122,18 +146,34 @@ const App = () => {
                               : <Navigate to="/login" replace />
                           }
                         />
+
                         <Route
                           path="/register"
-                          element={token ? <Navigate to="/" replace /> : <RegisterPage />}
+                          element={
+                            token
+                              ? <Navigate to="/" replace />
+                              : <RegisterPage />
+                          }
                         />
+
                         <Route
                           path="/useroptions"
-                          element={token ? <Navigate to="/" replace /> : <UserOptions />}
+                          element={
+                            token
+                              ? <Navigate to="/" replace />
+                              : <UserOptions />
+                          }
                         />
+
                         <Route
                           path="/favoritos"
-                          element={token ? <Favoritos /> : <Navigate to="/login" replace />}
+                          element={
+                            token
+                              ? <Favoritos />
+                              : <Navigate to="/login" replace />
+                          }
                         />
+
                         <Route path="*" element={<NotFound />} />
                       </Routes>
                     )}
@@ -143,8 +183,8 @@ const App = () => {
               </div>
             </BrowserRouter>
           </CartProvider>
-      </FavoritesProvider>
-        </ProductosProvider>
+        </FavoritesProvider>
+      </ProductosProvider>
     </UserProvider>
   );
 };
