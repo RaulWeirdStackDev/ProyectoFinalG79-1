@@ -136,7 +136,7 @@ const EditDireccion = () => {
             </div>
 
             <div className="mb-3">
-              <label className="form-label">Anexo</label>
+              <label className="form-label">N° de Casa o Departamento</label>
               <input
                 name="anexo"
                 value={form.anexo || ""}
