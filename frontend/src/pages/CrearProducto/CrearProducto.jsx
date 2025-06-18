@@ -10,11 +10,11 @@ const CrearProducto = () => {
     id_categoria: '',
     nombre: '',
     descripcion: '',
-    idioma: '',
+    idioma: 'EN',
     precio_venta: '',
     descuento: 0,
     img: '',
-    estado: '1',
+    estado: 'NM',
     rareza: '',
     edicion: '',
     tipo: '',
@@ -58,7 +58,7 @@ const CrearProducto = () => {
         estado: form.estado,
       }
 
-      const res = await fetch("https://proyectofinalg79-1.onrender.com/api/producto", {
+      const res = await fetch("http://localhost:3000/api/producto", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ const CrearProducto = () => {
         precio_venta: '',
         descuento: 0,
         img: '',
-        estado: '1',
+        estado: '',
         rareza: '',
         edicion: '',
         tipo: '',
@@ -146,10 +146,29 @@ const CrearProducto = () => {
             <textarea name="descripcion" value={form.descripcion} onChange={handleChange} className="form-control" />
           </div>
 
-          <div className="mb-3">
-            <label className="form-label">Idioma</label>
-            <input name="idioma" value={form.idioma} onChange={handleChange} className="form-control" required />
-          </div>
+          <div className="row mb-3">
+  <div className="col-md-6">
+    <label className="form-label">Idioma</label>
+    <input
+      name="idioma"
+      value={form.idioma}
+      onChange={handleChange}
+      className="form-control"
+      required
+    />
+  </div>
+
+  <div className="col-md-6">
+    <label className="form-label">Estado</label>
+    <input
+      name="estado"
+      value={form.estado}
+      onChange={handleChange}
+      className="form-control"
+      required
+    />
+  </div>
+</div>
 
           <div className="mb-3">
             <label className="form-label">Precio</label>

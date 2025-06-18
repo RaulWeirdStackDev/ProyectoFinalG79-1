@@ -6,6 +6,7 @@ import {
   readProductById,
   readProductosPorCategoria,
   updateProducto,
+  deleteProducto
 } from "../src/controllers/producto.controller.js"
 
 const router = Router()
@@ -15,5 +16,6 @@ router.get('/productos', readAllProductos)
 router.get('/producto/:id', authMiddleware, readProductById)
 router.get('/productos/:categoria', readProductosPorCategoria)
 router.patch('/producto/:id', authMiddleware, updateProducto)
+router.delete('/producto/:id', authMiddleware, deleteProducto)
 
 export default router
