@@ -71,18 +71,50 @@ const Checkout = () => {
 
     setLoading(true);
 
+
+
     try {
-      const response = await fetch("https://proyectofinalg79-1.onrender.com/api/checkouts", {
+
+      const user = localStorage.getItem("user");
+      const { id } = JSON.parse(user);
+      const descripcion = `Compra realizada el ${new Date().toLocaleDateString('es-CL')}`;
+
+      // Transforma el carrito en el detalle
+      const detalle = cart.map(item => {
+        const cantidad = Number(item.count) || 1;
+        const precio_venta = Number(item.precio_venta) || 0;
+        const descuento = Number(item.descuento) || 0;
+        const precio_final = (precio_venta - descuento) * cantidad;
+
+        return {
+          id_producto: item.id_producto,
+          cantidad,
+          precio_venta,
+          descuento,
+          precio_final
+        };
+      });
+
+      // Construye el objeto final que tensdrá todos los datos
+      const orden = {
+        id_usuario: id,
+        descripcion,
+        tipoEntrega,
+        direccionEnvio: tipoEntrega === "envio" ? direccionEnvio : null,
+        detalle
+      };
+
+      console.log(JSON.stringify(orden, null, 2));
+
+      const response = await fetch("https://proyectofinalg79-1.onrender.com/api/venta", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({
-          cart,
-          tipoEntrega,
-          direccionEnvio: tipoEntrega === "envio" ? direccionEnvio : null,
-        }),
+        body: JSON.stringify(
+          orden
+        ),
       });
 
       if (!response.ok) throw new Error("Error en el proceso de compra.");

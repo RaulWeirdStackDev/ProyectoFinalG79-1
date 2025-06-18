@@ -2,8 +2,8 @@ import { createVentaDetalleModel, createVentaModel, readVentaByUsuarioModel, rea
 
 export const createVenta = async (req, res) => {
     try {
-        const { id_usuario, descripcion, detalle } = req.body
-        const venta = await createVentaModel(id_usuario, descripcion)
+        const { id_usuario, descripcion, tipoEntrega,direccionEnvio,detalle } = req.body
+        const venta = await createVentaModel(id_usuario, descripcion,tipoEntrega,direccionEnvio)
         if (!venta) {
             res.status(500).json({ message: 'Error al procesar la solicitud' })
         }

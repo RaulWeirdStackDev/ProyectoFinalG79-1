@@ -1,8 +1,8 @@
 import pool from '../../db/config.js'
 
-export const createVentaModel = async (id_usuario, descripcion) => {
-    const sqlQuery = 'INSERT INTO venta (id_usuario, descripcion) VALUES ($1, $2) RETURNING *'
-    const values = [id_usuario, descripcion]
+export const createVentaModel = async (id_usuario, descripcion, tipoEntrega, direccionEnvio) => {
+    const sqlQuery = 'INSERT INTO venta (id_usuario, descripcion, tipo_Entrega,direccion_envio) VALUES ($1, $2, $3, $4) RETURNING *'
+    const values = [id_usuario, descripcion, tipoEntrega, direccionEnvio]
     const response = await pool.query(sqlQuery, values)
     return response.rows
 }
