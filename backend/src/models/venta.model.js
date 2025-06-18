@@ -8,7 +8,12 @@ export const createVentaModel = async (id_usuario, descripcion, tipoEntrega, dir
 }
 
 export const readVentaByUsuarioModel = async (id) => {
-    const sqlQuery = 'SELECT * FROM venta where id_usuario = $1'
+    const sqlQuery = `SELECT ven.id_venta, ven.id_usuario, ven.descripcion, ven.tipo_Entrega, ven.direccion_envio,
+                        sum (det.precio_final) as total_venta
+                    FROM venta ven
+                    JOin venta_detalle det ON ven.id_venta = det.id_venta
+                    WHERE ven.id_usuario = $1
+                    GROUP BY ven.id_venta, ven.id_usuario, ven.descripcion, ven.tipo_Entrega, ven.direccion_envio`
     const values = [id]
     const response = await pool.query(sqlQuery, values)
     return response.rows
