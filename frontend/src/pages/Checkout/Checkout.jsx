@@ -1,12 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
+import { CartContext } from "../../context/CartContext";
 import Swal from "sweetalert2";
 
 const Checkout = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const { token } = useContext(UserContext);
+  const { clearCart } = useContext(CartContext);
+
 
   const [cart, setCart] = useState([]);
   const [tipoEntrega, setTipoEntrega] = useState("");
@@ -71,7 +74,14 @@ const Checkout = () => {
 
     setLoading(true);
 
-
+    const finalizarCompra = () => {
+      // Limpiar sessionStorage tras compra exitosa
+      sessionStorage.removeItem("checkout_cart");
+      sessionStorage.removeItem("checkout_tipoEntrega");
+      sessionStorage.removeItem("cart");
+      clearCart()
+      Swal.fire("¡Éxito!", "Compra realizada con éxito. 🎉", "success");
+    }
 
     try {
 
@@ -95,16 +105,21 @@ const Checkout = () => {
         };
       });
 
+      let direccionDeEnvio = ''
+      if(tipoEntrega === "envio"){
+        direccionDeEnvio = `${direccionEnvio.direccion} ${direccionEnvio.numero} ${direccionEnvio.anexo}`
+      }       
+    
       // Construye el objeto final que tensdrá todos los datos
       const orden = {
         id_usuario: id,
         descripcion,
         tipoEntrega,
-        direccionEnvio: tipoEntrega === "envio" ? direccionEnvio : null,
+        direccionEnvio: tipoEntrega === "envio" ? direccionDeEnvio : null,
         detalle
       };
 
-      console.log(JSON.stringify(orden, null, 2));
+      // console.log(JSON.stringify(orden, null, 2));
 
       const response = await fetch("https://proyectofinalg79-1.onrender.com/api/venta", {
         method: "POST",
@@ -119,11 +134,7 @@ const Checkout = () => {
 
       if (!response.ok) throw new Error("Error en el proceso de compra.");
 
-      Swal.fire("¡Éxito!", "Compra realizada con éxito. 🎉", "success");
-
-      // Limpiar sessionStorage tras compra exitosa
-      sessionStorage.removeItem("checkout_cart");
-      sessionStorage.removeItem("checkout_tipoEntrega");
+      finalizarCompra()
 
       navigate("/"); // o a la página que desees después de la compra
     } catch (error) {

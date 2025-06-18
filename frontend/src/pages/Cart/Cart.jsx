@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Cart.css';
 
 const Cart = () => {
-  const { cart, updateQuantity, total, removeFromCart, clearCart } = useContext(CartContext);
+  const { cart, updateQuantity, total, removeFromCart } = useContext(CartContext);
   const { token } = useContext(UserContext);
   const [tipoEntrega, setTipoEntrega] = useState('');
   const navigate = useNavigate();
@@ -26,9 +26,6 @@ const Cart = () => {
     // GUARDAMOS EN SESSIONSTORAGE
     sessionStorage.setItem('checkout_cart', JSON.stringify(cart));
     sessionStorage.setItem('checkout_tipoEntrega', tipoEntrega);
-
-    navigate('/checkout', { state: { cart, tipoEntrega } });
-
 
     // Aquí se redirige a Checkout enviando datos
     navigate('/checkout', { state: { cart, tipoEntrega } });
