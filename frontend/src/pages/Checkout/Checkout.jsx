@@ -108,14 +108,16 @@ const Checkout = () => {
       let direccionDeEnvio = ''
       if(tipoEntrega === "envio"){
         direccionDeEnvio = `${direccionEnvio.direccion} ${direccionEnvio.numero} ${direccionEnvio.anexo}`
-      }       
+      }  else{
+        direccionDeEnvio = 'Local'
+      }    
     
       // Construye el objeto final que tensdrá todos los datos
       const orden = {
         id_usuario: id,
         descripcion,
         tipoEntrega,
-        direccionEnvio: tipoEntrega === "envio" ? direccionDeEnvio : null,
+        direccionEnvio: direccionDeEnvio,
         detalle
       };
 
