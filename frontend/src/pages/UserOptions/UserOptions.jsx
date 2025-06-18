@@ -7,10 +7,10 @@ const UserOptions = () => {
         <h2 className="text-center mb-4">Bienvenido 👋:</h2>
         <div className="d-grid gap-2">
           <Link to="/login" className="btn btn-dark mb-4">
-            Iniciar Sesión 🔐
+            Iniciar Sesión 🔐:
           </Link>
           <Link to="/register" className="btn btn-dark mb-2">
-            Registrarse 📕
+            Registrarse 🪪:
           </Link>
         </div>
       </div>
