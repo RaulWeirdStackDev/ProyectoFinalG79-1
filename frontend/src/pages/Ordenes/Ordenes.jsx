@@ -1,19 +1,25 @@
-import { useState, useEffect } from 'react';
-import { Container, Table,  Accordion, Alert, Spinner } from 'react-bootstrap';
-import { readVentaByUsuarioModel, readVentaByVentaModel } from '../../../../backend/src/models/venta.model'; // Adjust path to your API service
+import { useState, useEffect, useContext } from 'react';
+import { Container, Table, Accordion, Alert, Spinner } from 'react-bootstrap';
+import { readVentaByUsuarioModel, readVentaByVentaModel } from '../../../../backend/src/models/venta.model';
+import { UserContext } from '../../context/UserContext';
 
-export const Ordenes = ({ userId }) => {
+export const Ordenes = () => {
+  const { userData, token } = useContext(UserContext);
   const [ordenes, setOrdenes] = useState([]);
   const [detalles, setDetalles] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  
   useEffect(() => {
     const fetchOrdenes = async () => {
+      if (!userData || !userData.id) {
+        setError('Por favor, inicia sesión para ver tus órdenes.');
+        setLoading(false);
+        return;
+      }
       try {
         setLoading(true);
-        const response = await readVentaByUsuarioModel(userId);
+        const response = await readVentaByUsuarioModel(userData.id, token);
         setOrdenes(response);
       } catch (err) {
         setError('Error al cargar las órdenes. Intenta de nuevo más tarde.');
@@ -23,18 +29,26 @@ export const Ordenes = ({ userId }) => {
       }
     };
     fetchOrdenes();
-  }, [userId]);
+  }, [userData, token]);
 
   const fetchDetalles = async (idVenta) => {
-    if (detalles[idVenta]) return; 
+    if (detalles[idVenta]) return;
     try {
-      const response = await readVentaByVentaModel(idVenta);
+      const response = await readVentaByVentaModel(idVenta, token);
       setDetalles((prev) => ({ ...prev, [idVenta]: response }));
     } catch (err) {
       setError('Error al cargar los detalles de la orden.');
       console.error(err);
     }
   };
+
+  if (!userData || !userData.id) {
+    return (
+      <Container className="my-5">
+        <Alert variant="warning">Debes iniciar sesión para ver tus órdenes.</Alert>
+      </Container>
+    );
+  }
 
   if (loading) {
     return (
