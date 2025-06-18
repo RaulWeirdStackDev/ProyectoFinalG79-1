@@ -23,6 +23,7 @@ import ProductosProvider from './context/ProductosContext';
 import CartProvider from './context/CartContext';
 import UserProvider, { UserContext } from './context/UserContext';
 import FavoritesProvider from './context/FavoritesContext';
+import Ordenes from './pages/Ordenes/Ordenes';
 
 const App = () => {
   return (
@@ -41,6 +42,8 @@ const App = () => {
                         <Route path="/cart" element={<Cart />} />
                         <Route path="/itemdetails/:itemId" element={<ItemDetails />} />
                         <Route path="/productos/:categoria" element={<Productos />} />
+                        <Route path="/ordenes" element={<Ordenes />} />
+
 
                         <Route
                           path="/login"

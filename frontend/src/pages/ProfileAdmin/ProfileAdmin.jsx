@@ -65,7 +65,7 @@ const ProfileAdmin = () => {
           Crear publicación
         </Button>
         <Button className="btn-azul" onClick={() => navigate("/profile/edit")}>Editar perfil</Button>
-        <Button className="btn-azul">Ordenes</Button>
+        <Button className="btn-azul" onClick={() => navigate("/ordenes")}>Ordenes</Button>
         <Button className="btn-azul" onClick={() => navigate("/profile/address")}>
           Direcciones
         </Button>
