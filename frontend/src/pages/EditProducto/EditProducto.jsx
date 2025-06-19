@@ -166,8 +166,8 @@ const EditProducto = () => {
               <span>Imagen:</span>
               <input
                 className="form-control"
-                name="imagen"
-                value={productoSeleccionado.imagen || ''}
+                name="img"
+                value={productoSeleccionado.img || ''}
                 onChange={handleChange}
                 placeholder="URL de Imagen"
               />
