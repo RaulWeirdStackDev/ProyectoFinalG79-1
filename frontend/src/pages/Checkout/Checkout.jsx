@@ -121,7 +121,7 @@ const Checkout = () => {
         detalle
       };
 
-      // console.log(JSON.stringify(orden, null, 2));
+      console.log(JSON.stringify(orden, null, 2));
 
       const response = await fetch("https://proyectofinalg79-1.onrender.com/api/venta", {
         method: "POST",
